@@ -7,12 +7,11 @@ import { ReactComponent as Logout } from "./images/logout.svg";
 function Navbar(props) {
   let navigate = useNavigate();
   const logout = () => {
+    out()
     navigate("/");
   };
   const handleHome = async () => {
-    let user = await refreshUser();
-    console.log(props);
-    props.setCurrentUser(user);
+   
     navigate("/profile");
   };
   return (

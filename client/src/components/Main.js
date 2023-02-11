@@ -6,6 +6,7 @@ import Uploader from "./Uploader";
 import Popular from "./Popular";
 import Navbar from "./Navbar";
 import EnlargedPhoto from "./EnlargedPhoto";
+import { refreshUser } from "../ApiClient";
 
 function Main(props) {
   const [photos, setPhotos] = useState(props.currentAlbum.photos);
@@ -34,18 +35,12 @@ function Main(props) {
     setPhotos(upDatedPhotos);
   };
 
-  useEffect(() => {
-    sortByFavourites();
-  });
 
   return (
     <div className="main-container">
       <div>
         {" "}
-        <Navbar
-          setCurrentUser={props.setCurrentUser}
-          currentUser={props.currentUser}
-        />
+       
       </div>
       <br></br>
       <div className="top-div">

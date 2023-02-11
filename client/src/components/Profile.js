@@ -6,6 +6,7 @@ import NewAlbum from "./NewAlbum";
 import AlbumItem from "./AlbumItem";
 import Invites from "./Invites";
 import SharedAlbumItem from "./SharedAlbumItem";
+
 function Profile(props) {
   const [currentUser, setCurrentUser] = useState(props.currentUser);
   const [userAlbums, setUserAlbums] = useState(currentUser.uploadedAlbums);
@@ -22,9 +23,14 @@ function Profile(props) {
   };
   const inviteHandle = () => {
     setInvitePopup(!invitePopup);
+    
   };
   // useEffect(() => {console.log('inside profile' ,pendingInvite)}, [userAlbums, pendingInvite]);
 
+  useEffect(()=>{
+    const user = refreshUser()
+    setCurrentUser(user)
+  },[])
   let individualAlbums = userAlbums.map((album) => {
     return (
       <AlbumItem
@@ -51,7 +57,7 @@ function Profile(props) {
 
   return (
     <div>
-      <Navbar setCurrentUser={setCurrentUser} />
+     
       <br></br>
       <div className="profile">
         <div className="right-container">

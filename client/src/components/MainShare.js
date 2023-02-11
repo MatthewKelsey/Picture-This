@@ -42,10 +42,7 @@ function MainShare(props) {
     <div className="main-container">
       <div>
         {" "}
-        <Navbar
-          setCurrentUser={props.setCurrentUser}
-          currentUser={props.currentUser}
-        />
+       
       </div>
       <br></br>
       <div className="top-div">

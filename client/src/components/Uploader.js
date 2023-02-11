@@ -5,9 +5,10 @@ function Uploader(props) {
 
   const [previewSource, setPreviewSource] = useState();
   const handleFileInputChange = (e) => {
-    const files = e.target.files;
+    const file = e.target.files[0]
+    console.log(file)
     console.log(e);
-    previewFile(files[0]);
+    previewFile(file);
   };
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -22,8 +23,7 @@ function Uploader(props) {
   };
   const handleSubmitFile = (e) => {
     props.setShowUpload(false);
-    console.log(e);
-    console.log(previewSource);
+   
     e.preventDefault();
     if (!previewSource) return;
 

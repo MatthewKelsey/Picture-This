@@ -4,15 +4,24 @@ import Profile from "./components/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import NewAlbum from "./components/NewAlbum";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Invites from "./components/Invites";
 import MainShare from "./components/MainShare";
+import Navbar from "./components/Navbar";
+import { refreshUser } from "./ApiClient";
+
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [currentAlbum, setCurrentAlbum] = useState({});
+  useEffect(()=>{
+  refreshUser().then((data) =>{setCurrentUser(data)},[])
+   
+  })
   return (
     <div>
+    
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route
             path="/main"

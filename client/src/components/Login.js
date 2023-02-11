@@ -47,7 +47,7 @@ function Login(props) {
 
   return (
     <section className="register">
-      <Navbar />
+     
       <br></br>
       <img className="logoting" src="../logoting.png" alt="logo" />
 
