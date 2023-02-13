@@ -1,7 +1,7 @@
 "use strict";
 require('dotenv').config()
 
-const password = process.env.MONGO_PASSWORD
+const password = process.env.MONGODB_CREDNTIALS
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", true);
