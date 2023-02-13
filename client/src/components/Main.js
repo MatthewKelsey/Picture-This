@@ -20,6 +20,8 @@ function Main(props) {
    
   };
 
+
+
   const sortByFavourites = async () => {
     let allPhotos = photos;
     allPhotos.sort((a, b) => {
@@ -28,12 +30,18 @@ function Main(props) {
     setPopularPhotos(allPhotos);
   };
 
+
+
   const upDatePhotos = (id) => {
     let upDatedPhotos = photos.filter((obj) => {
       return obj._id !== id;
     });
     setPhotos(upDatedPhotos);
   };
+
+  useEffect(() => {
+    sortByFavourites();
+  }, []);
 
 
   return (

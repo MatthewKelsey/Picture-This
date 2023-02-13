@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ReactComponent as Ring } from "./images/logo.svg";
 
 function Popular(props) {
   let [currentPhoto, setCurrentPhoto] = useState(0);
@@ -7,6 +6,7 @@ function Popular(props) {
   let popularPhotos = props.popularPhotos.slice(0, 5);
 
   useEffect(() => {
+    console.log(popularPhotos)
     setTimeout(() => {
       if (currentPhoto < 4) {
         setCurrentPhoto(currentPhoto + 1);

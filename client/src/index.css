@@ -55,6 +55,7 @@ h1 {
   content: attr(title);
   position: relative;
   top: 15px;
+  max-width: 45%;
 }
 
 .photo-box img {
