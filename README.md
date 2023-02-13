@@ -5,7 +5,7 @@ Picture This is an app for sharing photos with friends and acquaintances through
 ## Screenshots
 
 <p align="center">
-  <img src="client/src/images/img01.png" />
+  <img src="/cover.png" />
 </p>
 
 ## Getting started
