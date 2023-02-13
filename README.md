@@ -13,7 +13,7 @@ Picture This is an app for sharing photos with friends and acquaintances through
 1. Clone the repo
 ```bash
 git clone https://github.com/MatthewKelsey/Picture-This
-cd Swoop
+cd 
 ```
 
 2. Install dependencies in both /client and /server folders
@@ -25,7 +25,7 @@ npm install
 3. Start development server
 
 ```bash
-cd /Server
+cd /server
 nodemon index.js
 ```
 
