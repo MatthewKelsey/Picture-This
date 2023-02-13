@@ -5,9 +5,7 @@ function Uploader(props) {
 
   const [previewSource, setPreviewSource] = useState();
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0]
-    console.log(file)
-    console.log(e);
+    const file = e.target.files[0];
     previewFile(file);
   };
   const previewFile = (file) => {
@@ -23,7 +21,7 @@ function Uploader(props) {
   };
   const handleSubmitFile = (e) => {
     props.setShowUpload(false);
-   
+
     e.preventDefault();
     if (!previewSource) return;
 
@@ -50,7 +48,7 @@ function Uploader(props) {
         credentials: "include",
       });
       const newImg = await result.json();
-      console.log(newImg);
+
       const newArr = [newImg, ...props.photos];
       props.setPhotos(newArr);
     } catch (error) {
@@ -79,7 +77,8 @@ function Uploader(props) {
         </button>
       </form>
       {previewSource && (
-        <img src={previewSource} alt="chosen" style={{ height: "200px" }} />
+        <div className= 'uploader-image'>
+        <img src={previewSource} alt="chosen" style={{ height: "200px" }} /></div>
       )}
     </div>
   );

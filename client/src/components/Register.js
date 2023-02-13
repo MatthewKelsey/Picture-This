@@ -29,7 +29,6 @@ const Register = (props) => {
     const { email, password, firstName, lastName } = state;
     const user = { email, password, firstName, lastName };
     const res = await reg(user);
-    console.log({ res });
     if (res.status === 409) {
       alert(`${res.message}`);
       setState(initialState);

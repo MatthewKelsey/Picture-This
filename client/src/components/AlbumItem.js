@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 function AlbumItem(props) {
   const navigate = useNavigate();
   const removeAlbum = async () => {
-    console.log("delete and ting");
+    
     deleteAlbum(props.album._id);
     let newAlbumCollection = props.userAlbums;
-    console.log(newAlbumCollection);
+
     const index = newAlbumCollection.findIndex((element) => {
       return element._id === props.album._id;
     });
     newAlbumCollection.splice(index, 1);
     props.setUserAlbums([...newAlbumCollection]);
-    console.log(props.userAlbums);
+   
   };
   const openAlbum = async () => {
     const currentAlbum = await getAlbum(props.album._id);

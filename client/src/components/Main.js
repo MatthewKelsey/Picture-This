@@ -17,7 +17,7 @@ function Main(props) {
   const [sharePopup, setSharePopup] = useState(false);
   const share = () => {
     setSharePopup(!sharePopup);
-    console.log(sharePopup);
+   
   };
 
   const sortByFavourites = async () => {

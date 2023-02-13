@@ -10,11 +10,9 @@ function InviteItem(props) {
     });
     props.setInvites(remainingInvites);
     props.setPendingInvites(remainingInvites);
-    console.log("inside invite item", remainingInvites);
   };
 
   const reject = async () => {
-    console.log("You were rejected!");
     await rejectAlbum(props.invite);
     let invites = props.invites;
     let remainingInvites = invites.filter((element) => {

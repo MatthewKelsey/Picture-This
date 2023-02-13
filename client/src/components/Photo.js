@@ -18,13 +18,11 @@ function Photo(props) {
   }
 
   function largeHandle() {
-    console.log(props.photo.imgAddress);
     props.setLargePhoto(props.photo.imgAddress);
     props.setLargePhotoActive(true);
   }
   useEffect(() => {
-    console.log("owner", owner);
-    console.log("user", user);
+   
     if (likedBy.indexOf(user) === -1) {
       setLike(false);
     }

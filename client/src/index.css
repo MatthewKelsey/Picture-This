@@ -335,8 +335,8 @@ h1 {
 .album-item {
   background: #ffffff;
   display: flex;
-  margin: 5px 5px 3px;
-  padding: 15px 15px 30px;
+  margin: 5px 3px 10px 3px;
+  padding: 15px 10px 30px;
   text-align: center;
   text-decoration: none;
   -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -511,6 +511,11 @@ h1 {
 }
 
 .username {
+  justify-self: center;
+  align-self: center;
+}
+
+.uploader-image{
   justify-self: center;
   align-self: center;
 }

@@ -3,7 +3,6 @@ import { useState } from "react";
 import InviteItem from "./InviteItem";
 function Invites(props) {
   const [invites, setInvites] = useState(props.currentUser.pendingInvite);
-  useEffect(() => {}, []);
 
   const close = () => {
     props.setInvitePopup(false);

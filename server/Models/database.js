@@ -1,13 +1,15 @@
 "use strict";
+require('dotenv').config()
 
+const password = process.env.MONGO_PASSWORD
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", true);
 
 mongoose
   .connect(
-    "mongodb+srv://Matthew:Whakedw1@cluster0.men6wel.mongodb.net/?retryWrites=true&w=majority"
+    password
   )
-  .then(console.log("Connected to database"));
+  .then(console.log('Connected to database'));
 
 module.exports = mongoose;

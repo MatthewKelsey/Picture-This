@@ -14,9 +14,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [currentAlbum, setCurrentAlbum] = useState({});
   useEffect(()=>{
-  refreshUser().then((data) =>{setCurrentUser(data)},[])
+    if(!currentUser){
+  refreshUser().then((data) =>{console.log(data)})}
    
-  })
+  },[])
   return (
     <div>
     

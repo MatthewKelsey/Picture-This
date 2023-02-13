@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 function SharedAlbumItem(props) {
   const navigate = useNavigate();
   const removeAlbum = async () => {
-    console.log("remove shared and ting");
+   
     removeSharedAlbum(props.album._id);
     let newAlbumCollection = props.sharedAlbums;
-    console.log(newAlbumCollection);
+   
     const index = newAlbumCollection.findIndex((element) => {
       return element._id === props.album._id;
     });
     newAlbumCollection.splice(index, 1);
     props.setSharedAlbums([...newAlbumCollection]);
-    console.log(props.userAlbums);
+  
   };
   const openAlbum = async () => {
     const currentAlbum = await getAlbum(props.album._id);

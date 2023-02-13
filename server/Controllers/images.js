@@ -50,7 +50,7 @@ exports.addLike = async (req, res) => {
 
     currentPhoto.liked.contains;
     if (likers.includes(req.session.uid)) {
-      // console.log(li)
+      
       let index = likers.indexOf(req.session.uid);
       console.log(index);
       likers.splice(index, [index + 1]);
