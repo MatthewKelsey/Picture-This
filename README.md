@@ -26,7 +26,7 @@ npm install
 
 ```bash
 cd /server
-nodemon index.js
+npx nodemon 
 ```
 
 4. Start the front end app
