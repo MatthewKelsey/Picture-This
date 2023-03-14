@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const PORT = 4000;
+const port = process.env.PORT || 4000;
 const router = require("./router");
 const session = require("express-session");
 
@@ -20,13 +20,13 @@ app.use(
 );
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
     credentials: true,
   })
 );
 app.use(express.json({ limit: "50mb" }));
 app.use(router);
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });
