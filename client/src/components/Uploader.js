@@ -34,7 +34,7 @@ function Uploader(props) {
 
   const uploadImage = async (obj) => {
     try {
-      const result = await fetch("http://localhost:4000/upload", {
+      const result = await fetch("http://localhost:4001/upload", {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {

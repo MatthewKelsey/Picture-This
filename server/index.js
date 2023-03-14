@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4001;
 const router = require("./router");
 const session = require("express-session");
 
 app.use(
   session({
-    name: "qid",
+    name: "uid",
     secret: "superdupersecret",
     resave: false,
     saveUninitialized: false,
@@ -20,7 +20,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
     credentials: true,
   })

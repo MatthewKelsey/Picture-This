@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { out, login, refreshUser } from "../ApiClient";
-import { ReactComponent as Home } from "./images/home.svg";
-import { ReactComponent as Logout } from "./images/logout.svg";
+import { out, refreshUser } from "../ApiClient";
 
 function Navbar(props) {
   let navigate = useNavigate();
