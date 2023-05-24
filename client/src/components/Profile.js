@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { refreshUser } from "../ApiClient";
 import NewAlbum from "./NewAlbum";
-import AlbumItem from "./AlbumItem";
+import AlbumItem from './AlbumItem'
 import Invites from "./Invites";
 import SharedAlbumItem from "./SharedAlbumItem";
-
+import { ImageList, imageListClasses } from "@mui/material";
+import { makeStyles } from "@mui/material";
 function Profile(props) {
-  // const [currentUser, setCurrentUser] = useState();
-  const [userAlbums, setUserAlbums] = useState(props.currentUser.uploadedAlbums);
-  const [sharedAlbums, setSharedAlbums] = useState(props.currentUser.sharedAlbums);
+  const [currentUser, setCurrentUser] = useState();
+  const [userAlbums, setUserAlbums] = useState(
+    props.currentUser.uploadedAlbums
+  );
+  const [sharedAlbums, setSharedAlbums] = useState(
+    props.currentUser.sharedAlbums
+  );
+
+
   const [albumPopup, setAlbumPopup] = useState(false);
-  // const [pendingInvite, setPendingInvite] = useState(
-  //   props.currentUser.pendingInvite
-  // );
+  const [pendingInvite, setPendingInvite] = useState([]);
   const [invitePopup, setInvitePopup] = useState(false);
   const navigate = useNavigate();
 
@@ -23,64 +27,75 @@ function Profile(props) {
   };
   const inviteHandle = () => {
     setInvitePopup(!invitePopup);
-    
   };
-//   useEffect(()=>{
-//     console.log()
-// setCurrentUser(props.currentUser)
-// console.log(currentUser)
-//   }, [props.currentUser])
+  useEffect(() => {
+    console.log('hello')
+    refreshUser()
+      .then((data) => props.setCurrentUser(data))
+      .then(setUserAlbums(props.currentUser.uploadedAlbums))
+      .then(setPendingInvite(props.currentUser.pendingInvite));
+    console.log(props.currentUser)
+    setCurrentUser(props.currentUser);
+  }, []);
 
   return (
     <div>
-     
-      <br></br>
+      <br />
       <div className="profile">
         <div className="right-container">
-          <h2 className="username">
-            Welcome back {props.currentUser.firstName}
-          </h2>
           <div>
             <h2>My albums</h2>
           </div>
-          <div className="albums">
-            {userAlbums && userAlbums.map((album) => {
-    return (
-      <AlbumItem
-        album={album}
-        userAlbums={userAlbums}
-        setUserAlbums={setUserAlbums}
-        currentAlbum={props.currentAlbum}
-        setCurrentAlbum={props.setCurrentAlbum}
-      />
-    );
-  })}
-          </div>
+        <div style={{width:'100%'}}>
+            <ImageList
+         
+              sx={{  "&::-webkit-scrollbar": {
+                display: "none",
+              },height: 200,width:'100%', overflowX: "scroll" , display: "flex", flexDirection:'row'}}
+             cols={2.5}
+             rowHeight={200}
+            >
+              {userAlbums && userAlbums.map((album) => (
+                <AlbumItem
+                  key={album._id}
+                  album={album}
+                  userAlbums={userAlbums}
+                  setUserAlbums={setUserAlbums}
+                  currentAlbum={props.currentAlbum}
+                  setCurrentAlbum={props.setCurrentAlbum}
+                />
+              ))}
+            </ImageList>
+            </div>
           <div>
             <h2>Shared albums</h2>
           </div>
           <div className="albums">
-            {sharedAlbums&& sharedAlbums.map((album) => {
-    return (
-      <SharedAlbumItem
-        album={album}
-        setUserAlbums={setUserAlbums}
-        sharedAlbums={sharedAlbums}
-        currentAlbum={props.currentAlbum}
-        setSharedAlbums={setSharedAlbums}
-        setCurrentAlbum={props.setCurrentAlbum}
-      />
-    );
-  })}
-            </div>
+            <ImageList
+              sx={{ width: "100%", height: 200, overflowX: "auto" }}
+              cols={4}
+            >
+              {sharedAlbums.map((album) => (
+                <SharedAlbumItem
+                  key={album._id}
+                  album={album}
+                  setUserAlbums={setUserAlbums}
+                  sharedAlbums={sharedAlbums}
+                  currentAlbum={props.currentAlbum}
+                  setSharedAlbums={setSharedAlbums}
+                  setCurrentAlbum={props.setCurrentAlbum}
+                />
+              ))}
+            </ImageList>
+          </div>
         </div>
       </div>
       <div className="add-photo" onClick={addHandle}>
         +
       </div>
-      {(props.currentUser && props.currentUser.pendingInvite.length) ? (
+      {props.currentUser && pendingInvite.length ? (
         <div className="invite-alert" onClick={inviteHandle}>
-          <img src="../invite.png"></img>
+          <img src="../invite.png" alt="invite" />
         </div>
       ) : (
         ""

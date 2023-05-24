@@ -1,30 +1,28 @@
 import React from "react";
 
 import ShareAlbum from "./ShareAlbum";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MainAlbum from "./MainAlbum";
 import Uploader from "./Uploader";
-import Popular from "./Popular";
-import Navbar from "./Navbar";
+
 import EnlargedPhoto from "./EnlargedPhoto";
 function MainShare(props) {
   const [photos, setPhotos] = useState(props.currentAlbum.photos);
-  const [popularPhotos, setPopularPhotos] = useState([]);
   const [showUpload, setShowUpload] = useState(false);
   const [largePhoto, setLargePhoto] = useState("");
   const [largePhotoActive, setLargePhotoActive] = useState(false);
   const [sharePopup, setSharePopup] = useState(false);
-  const share = () => {
-    setSharePopup(!sharePopup);
-  };
+  // const share = () => {
+  //   setSharePopup(!sharePopup);
+  // };
 
-  const sortByFavourites = async () => {
-    let allPhotos = photos;
-    allPhotos.sort((a, b) => {
-      return b.likes - a.likes;
-    });
-    setPopularPhotos(allPhotos);
-  };
+  // const sortByFavourites = async () => {
+  //   let allPhotos = photos;
+  //   allPhotos.sort((a, b) => {
+  //     return b.likes - a.likes;
+  //   });
+  //   setPopularPhotos(allPhotos);
+  // };
 
   const upDatePhotos = (id) => {
     let upDatedPhotos = photos.filter((obj) => {
@@ -33,9 +31,7 @@ function MainShare(props) {
     setPhotos(upDatedPhotos);
   };
 
-  useEffect(() => {
-    sortByFavourites();
-  }, []);
+
 
   return (
     <div className="main-container">
@@ -44,9 +40,7 @@ function MainShare(props) {
        
       </div>
       <br></br>
-      <div className="top-div">
-        <Popular popularPhotos={popularPhotos} />
-      </div>
+      
       <div className="main-album">
         <MainAlbum
           currentAlbum={props.currentAlbum}

@@ -1,43 +1,67 @@
-import React from "react";
-import { getAlbum, deleteAlbum } from "../ApiClient";
+import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-function AlbumItem(props) {
-  const navigate = useNavigate();
-  const removeAlbum = async () => {
-    
-    deleteAlbum(props.album._id);
-    let newAlbumCollection = props.userAlbums;
+import { deleteAlbum, getAlbum } from "../ApiClient";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
 
-    const index = newAlbumCollection.findIndex((element) => {
-      return element._id === props.album._id;
-    });
-    newAlbumCollection.splice(index, 1);
-    props.setUserAlbums([...newAlbumCollection]);
-   
-  };
-  const openAlbum = async () => {
-    const currentAlbum = await getAlbum(props.album._id);
-    props.setCurrentAlbum(currentAlbum);
+function AlbumItem({ album, userAlbums, setUserAlbums, setCurrentAlbum }) {
+  const navigate = useNavigate();
+
+  const removeAlbum = useCallback(async () => {
+    await deleteAlbum(album._id);
+    const newAlbumCollection = userAlbums.filter(
+      (element) => element._id !== album._id
+    );
+    setUserAlbums(newAlbumCollection);
+  }, [album._id, userAlbums, setUserAlbums]);
+
+  const openAlbum = useCallback(async () => {
+    const currentAlbum = await getAlbum(album._id);
+    setCurrentAlbum(currentAlbum);
     navigate("/main");
-  };
+  }, [album._id, setCurrentAlbum, navigate]);
 
   return (
-    <div className="album-item">
-      {props.album.photos[0] ? (
-        <img
-          onClick={openAlbum}
-          alt="album"
-          src={props.album.photos[0].imgAddress}
-        ></img>
+    <ImageListItem
+      key={album._id}
+      
+      sx={{
+        gap:2,
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+        height: 200,
+        minWidth: "300px",
+        cursor: "pointer",
+      }}
+      onClick={openAlbum}
+    >
+      {album.photos[0] ? (
+        <img alt="album" src={album.photos[0].imgAddress} loading="lazy"/>
       ) : (
-        <h1 onClick={openAlbum}>+</h1>
+        <h1>+</h1>
       )}
-      <div className="bin">
-        <img src="../bin.png" alt="bin" onClick={removeAlbum}></img>
-      </div>
-      {props.album.albumName && <p>{props.album.albumName}</p>}
-    </div>
+      <ImageListItemBar
+        title={album.albumName}
+        actionIcon={
+          <DeleteForeverIcon
+            onClick={removeAlbum}
+            style={{ color: "#ffffff" }}
+          />
+        }
+      />
+    </ImageListItem>
   );
 }
+
+AlbumItem.propTypes = {
+  album: PropTypes.object.isRequired,
+  userAlbums: PropTypes.array.isRequired,
+  setUserAlbums: PropTypes.func.isRequired,
+  setCurrentAlbum: PropTypes.func.isRequired,
+};
 
 export default AlbumItem;

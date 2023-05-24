@@ -1,0 +1,7 @@
+.album-list{
+    width: 300;
+    height: 200;
+    margin: 1;
+    cursor: pointer;
+    overflow: scroll;
+}

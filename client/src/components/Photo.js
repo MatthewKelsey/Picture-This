@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { likePhoto, deletePhoto } from "../ApiClient";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import './Photo.css';
+import { ImageListItem } from "@mui/material";
 
 function Photo(props) {
   const [like, setLike] = useState(true);
@@ -7,13 +12,14 @@ function Photo(props) {
   const likedBy = props.photo.liked;
   const owner = props.currentAlbum.owner;
   const uploader = props.photo.uploader;
+
   function deleteHandle() {
     deletePhoto(props.photo._id);
     props.upDatePhotos(props.photo._id);
   }
+
   function likeHandle() {
     likePhoto(props.photo._id);
-
     setLike(!like);
   }
 
@@ -21,34 +27,36 @@ function Photo(props) {
     props.setLargePhoto(props.photo.imgAddress);
     props.setLargePhotoActive(true);
   }
+
   useEffect(() => {
-   
     if (likedBy.indexOf(user) === -1) {
       setLike(false);
     }
   }, []);
 
   return (
-    <div className="photo-box">
-      <img alt="hurro" src={props.photo.imgAddress} onClick={largeHandle}></img>
+    <ImageListItem sx={{position:'relative'}}
+    >
+      <img
+        alt="hurro"
+        src={`${props.photo.imgAddress}?w=248&fit=crop&auto=format`}
+        srcSet={`${props.photo.imgAddress}?w=248&fit=crop&auto=format&dpr=2 2x`}
+        onClick={largeHandle}
+      />
       {(user === owner || user === uploader) && (
         <div className="bin" onClick={deleteHandle}>
-          <img src="../bin.png"></img>
+          <DeleteForeverIcon />
         </div>
       )}
-
-      <div className="heart" onClick={likeHandle}>
+     
+      <div className="favorite-icon" onClick={likeHandle}>
         {like ? (
-          <div className="like">
-            <img src="../fullHeart.png"></img>
-          </div>
+          <FavoriteIcon sx={{ color: 'red' }} />
         ) : (
-          <div className="like">
-            <img src="../emptyHeart.png"></img>
-          </div>
+          <FavoriteBorderIcon sx={{ color: 'red' }} />
         )}
       </div>
-    </div>
+      </ImageListItem>
   );
 }
 

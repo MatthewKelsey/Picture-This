@@ -19,10 +19,11 @@ exports.uploadPhoto = async (req, res) => {
     const fileStr = req.body.data;
     const album = await Album.findOne({ _id: req.body.album });
     const result = await cloudinary.uploader.upload(fileStr);
+    console.log(result)
     const newImg = await Img.create({
       ...req.body,
       imgAddress: result.secure_url,
-      id: result.id,
+      id: result.public_id,
       uploader: req.session.uid,
     });
     photos = album.photos;
@@ -71,6 +72,8 @@ exports.addLike = async (req, res) => {
 exports.deletePhoto = async (req, res) => {
   try {
     const photoId = req.body.id;
+    const publicId = req.body.public_id; // the public ID of the image to delete from Cloudinary
+    await cloudinary.uploader.destroy(photoId); // delete the image from Cloudinary
     let result = await Img.findOneAndDelete({ _id: photoId });
     res.status(204).send();
   } catch (error) {

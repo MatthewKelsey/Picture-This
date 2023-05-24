@@ -4,7 +4,7 @@ import Profile from "./components/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import NewAlbum from "./components/NewAlbum";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import Invites from "./components/Invites";
 import MainShare from "./components/MainShare";
 import Navbar from "./components/Navbar";
@@ -13,14 +13,16 @@ import { refreshUser } from "./ApiClient";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [currentAlbum, setCurrentAlbum] = useState({});
-  useEffect(()=>{
-    if(!currentUser){
-  refreshUser().then((data) =>{console.log(data)})}
-   
-  },[])
+  useEffect(() => {
+    if (!currentUser) {
+      console.log("app use effect");
+      refreshUser().then((data) => {
+        console.log(data);
+      });
+    }
+  });
   return (
-    <div>
-    
+    <div className="app">
       <BrowserRouter>
         <Navbar />
         <Routes>

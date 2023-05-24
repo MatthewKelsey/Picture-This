@@ -1,0 +1,19 @@
+.nav-bar {
+  align-items: center;
+  height: 4%;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--primary);
+  z-index: 10;
+  color: #fafafa;
+}
+
+.logout {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+

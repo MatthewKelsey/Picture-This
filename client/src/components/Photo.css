@@ -1,0 +1,13 @@
+.favorite-icon {
+  position: relative;
+  bottom: 60px;
+  left: 20px;
+  width: 50px
+}
+
+.bin {
+  position: relative;
+  bottom: 20px;
+
+  left: 340px;
+}

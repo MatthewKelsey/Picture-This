@@ -1,28 +1,26 @@
 import React from "react";
 import { acceptInvite, rejectAlbum } from "../ApiClient";
+
 function InviteItem(props) {
+  const { invite, setInvites, invites, sharedAlbums, setSharedAlbums, setPendingInvites } = props;
+
   const accept = async () => {
-    let newShare = await acceptInvite({ albumId: props.invite._id });
-    props.setSharedAlbums([newShare, ...props.sharedAlbums]);
-    let invites = props.invites;
-    let remainingInvites = invites.filter((element) => {
-      return element._id !== props.invite._id;
-    });
-    props.setInvites(remainingInvites);
-    props.setPendingInvites(remainingInvites);
+    let newShare = await acceptInvite({ albumId: invite._id });
+    setSharedAlbums([newShare, ...sharedAlbums]);
+    let remainingInvites = invites.filter((element) => element._id !== invite._id);
+    setInvites(remainingInvites);
+    setPendingInvites(remainingInvites);
   };
 
   const reject = async () => {
-    await rejectAlbum(props.invite);
-    let invites = props.invites;
-    let remainingInvites = invites.filter((element) => {
-      return element._id !== props.invite._id;
-    });
-    props.setInvites(remainingInvites);
+    await rejectAlbum(invite);
+    let remainingInvites = invites.filter((element) => element._id !== invite._id);
+    setInvites(remainingInvites);
   };
+
   return (
     <div className="invite-item">
-      <p>{props.invite.albumName}</p>
+      <p>{invite.albumName}</p>
       <div className="accept">
         <img onClick={accept} alt="accept" src="../accept.png"></img>
         <img src="../reject.png" alt="reject" onClick={reject}></img>

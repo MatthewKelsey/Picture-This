@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-// import auth from '../utils/auth';
-import { ReactComponent as Logo } from "./images/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { reg } from "../ApiClient";
-import Navbar from "./Navbar";
+import './Register.css'
 const initialState = {
   email: "",
   password: "",
@@ -53,7 +51,7 @@ const Register = (props) => {
     <section className="register">
       
       <br></br>
-      <img className="logoting" src="../logoting.png"></img>
+      
       <h2>Register</h2>
       <form className="form" onSubmit={handleSubmit}>
         <input

@@ -1,59 +1,46 @@
 import React, { useState } from "react";
+import { uploadPhoto } from "../ApiClient";
 
 function Uploader(props) {
-  const [fileInputState] = useState("");
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState([]);
 
-  const [previewSource, setPreviewSource] = useState();
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    previewFile(file);
+    const files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      previewFile(files[i]);
+    }
+    setFileInputState("");
   };
+
   const previewFile = (file) => {
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
+      setPreviewSource((prevPreviewSource) => [
+        ...prevPreviewSource,
+        reader.result,
+      ]);
     };
   };
+
+  const handleSubmitFile = async (e) => {
+    e.preventDefault();
+    for (let i = 0; i < previewSource.length; i++) {
+      await uploadPhoto({
+        album: props.currentAlbum._id,
+        data: previewSource[i],
+        admin: props.currentAlbum.owner,
+      });
+      setPreviewSource((prevState) =>
+        prevState.filter((_, index) => index !== i)
+      );
+    }
+    props.setShowUpload(false);
+  };
+
   const close = () => {
     props.setShowUpload(false);
-  };
-  const handleSubmitFile = (e) => {
-    props.setShowUpload(false);
-
-    e.preventDefault();
-    if (!previewSource) return;
-
-    uploadImage({
-      album: props.currentAlbum._id,
-      data: previewSource,
-      admin: props.currentAlbum.owner,
-    });
-  };
-
-  const uploadImage = async (obj) => {
-    try {
-      const result = await fetch("http://localhost:4001/upload", {
-        method: "POST",
-        body: JSON.stringify(obj),
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers":
-            "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-          "Access-Control-Allow-Methods":
-            "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-        },
-        credentials: "include",
-      });
-      const newImg = await result.json();
-
-      const newArr = [newImg, ...props.photos];
-      props.setPhotos(newArr);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -71,14 +58,21 @@ function Uploader(props) {
           className="form-input"
           multiple
         />
-        <button className="btn" type="submit">
-          {" "}
+        <button className="btn" type="submit" disabled={!previewSource.length}>
           Submit
         </button>
       </form>
-      {previewSource && (
-        <div className= 'uploader-image'>
-        <img src={previewSource} alt="chosen" style={{ height: "200px" }} /></div>
+      {previewSource.length > 0 && (
+        <div className="uploader-image">
+          {previewSource.map((source, index) => (
+            <img
+              key={index}
+              src={source}
+              alt="chosen"
+              style={{ height: "200px", margin: "5px" }}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

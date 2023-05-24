@@ -1,17 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function EnlargedPhoto(props) {
-  function close() {
-    props.setLargePhotoActive(false);
-  }
+function EnlargedPhoto({ largePhoto, setLargePhotoActive }) {
+  const close = () => setLargePhotoActive(false);
+
   return (
     <div className="enlarged-photo">
-      <img src={props.largePhoto} alt="Big"></img>
-      <div className="close">
-        <p onClick={close}>close</p>
+      <img src={largePhoto} alt="Big" />
+      <div className="close" onClick={close}>
+        <p>close</p>
       </div>
     </div>
   );
 }
+
+EnlargedPhoto.propTypes = {
+  largePhoto: PropTypes.string.isRequired,
+  setLargePhotoActive: PropTypes.func.isRequired,
+};
 
 export default EnlargedPhoto;

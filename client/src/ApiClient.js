@@ -14,7 +14,7 @@ export const getAllPhotos = async () => {
 };
 
 export const uploadPhoto = async (content) => {
-  console.log(content);
+  console.log('in API');
   try {
     const response = await fetch(root + "upload", {
       method: "POST",
@@ -91,7 +91,6 @@ export const refreshUser = async () => {
     const response = await fetch(root + "refresh", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-
       credentials: "include",
     });
     const loggedUser = await response.json();
