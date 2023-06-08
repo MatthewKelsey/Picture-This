@@ -16,10 +16,11 @@ exports.getPhotos = async (req, res) => {
 
 exports.uploadPhoto = async (req, res) => {
   try {
+    console.log(req.body)
     const fileStr = req.body.data;
     const album = await Album.findOne({ _id: req.body.album });
     const result = await cloudinary.uploader.upload(fileStr);
-    console.log(result)
+    
     const newImg = await Img.create({
       ...req.body,
       imgAddress: result.secure_url,

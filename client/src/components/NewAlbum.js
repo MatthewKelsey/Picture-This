@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { createAlbum } from "../ApiClient";
+import { useDispatch } from "react-redux";
+import{addAlbum} from '../userSlice'
 function NewAlbum(props) {
+  const dispatch = useDispatch()
   const initialState = {
     albumName: "",
   };
@@ -15,8 +18,8 @@ function NewAlbum(props) {
 
     let newAlbum = await createAlbum(album);
 
-    const newAlbumList = [newAlbum, ...props.userAlbums];
-    props.setUserAlbums(newAlbumList);
+    dispatch(addAlbum(newAlbum))
+   
     props.setAlbumPopup(false);
   };
   const close = () => {
@@ -43,7 +46,7 @@ function NewAlbum(props) {
         X
       </div>
       <div>
-        <img src="../picture-this1.png"></img>
+        <img src="../picture-this1.png" alt="this"></img>
       </div>
 
       <br></br>

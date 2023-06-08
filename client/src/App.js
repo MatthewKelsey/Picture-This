@@ -9,22 +9,26 @@ import Invites from "./components/Invites";
 import MainShare from "./components/MainShare";
 import Navbar from "./components/Navbar";
 import { refreshUser } from "./ApiClient";
+import { useSelector } from "react-redux";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [currentAlbum, setCurrentAlbum] = useState({});
+  const notificationBell = useSelector((state) =>  state.notifications.albumInvite);
   useEffect(() => {
+    
+    console.log("notification", notificationBell);
     if (!currentUser) {
-      console.log("app use effect");
       refreshUser().then((data) => {
         console.log(data);
       });
     }
-  });
+  }, []);
   return (
     <div className="app">
       <BrowserRouter>
-        <Navbar />
+        <Navbar currentUser={currentUser} />
+      {/* {notificationBell && <Invites />} */}
         <Routes>
           <Route
             path="/main"

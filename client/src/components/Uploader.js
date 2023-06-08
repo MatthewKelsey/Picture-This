@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { uploadPhoto } from "../ApiClient";
-
+import "./Uploader.css";
 function Uploader(props) {
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState([]);
@@ -27,14 +27,17 @@ function Uploader(props) {
   const handleSubmitFile = async (e) => {
     e.preventDefault();
     for (let i = 0; i < previewSource.length; i++) {
-      await uploadPhoto({
+     const newPhoto = await uploadPhoto({
         album: props.currentAlbum._id,
         data: previewSource[i],
         admin: props.currentAlbum.owner,
+        uploaderName: `${props.currentUser.firstName} ${props.currentUser.lastName}`
+
       });
       setPreviewSource((prevState) =>
         prevState.filter((_, index) => index !== i)
       );
+      props.setPhotos([...props.photos , newPhoto ])
     }
     props.setShowUpload(false);
   };
@@ -49,6 +52,19 @@ function Uploader(props) {
         X
       </div>
       <br></br>
+      
+      {previewSource.length > 0 && (
+        <div className="uploader-image">
+          {previewSource.map((source, index) => (
+            <img
+              key={index}
+              src={source}
+              alt="chosen"
+              style={{ height: "200px", margin: "5px" }}
+            />
+          ))}
+        </div>
+      )}
       <form className="center" onSubmit={handleSubmitFile}>
         <input
           type="file"
@@ -62,18 +78,6 @@ function Uploader(props) {
           Submit
         </button>
       </form>
-      {previewSource.length > 0 && (
-        <div className="uploader-image">
-          {previewSource.map((source, index) => (
-            <img
-              key={index}
-              src={source}
-              alt="chosen"
-              style={{ height: "200px", margin: "5px" }}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 }

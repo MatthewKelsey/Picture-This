@@ -1,62 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { likePhoto, deletePhoto } from "../ApiClient";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import './Photo.css';
-import { ImageListItem } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import "./Photo.css";
+import { ImageListItem, ImageListItemBar } from "@mui/material";
+import Badge from "@mui/material/Badge";
 
-function Photo(props) {
+function Photo({
+  currentAlbum,
+  upDatePhotos,
+  key,
+  photo,
+  setLargePhoto,
+  setLargePhotoActive,
+  currentUser,
+}) {
   const [like, setLike] = useState(true);
-  const user = props.currentUser._id;
-  const likedBy = props.photo.liked;
-  const owner = props.currentAlbum.owner;
-  const uploader = props.photo.uploader;
+  const user = currentUser._id;
+  const likedBy = photo.liked;
+  const owner = currentAlbum.owner;
+  const uploader = photo.uploader;
+  const uploaderName = photo.uploaderName;
 
   function deleteHandle() {
-    deletePhoto(props.photo._id);
-    props.upDatePhotos(props.photo._id);
+    deletePhoto(photo._id);
+    upDatePhotos(photo._id);
   }
 
   function likeHandle() {
-    likePhoto(props.photo._id);
+    likePhoto(photo._id);
     setLike(!like);
   }
 
   function largeHandle() {
-    props.setLargePhoto(props.photo.imgAddress);
-    props.setLargePhotoActive(true);
+    setLargePhoto(photo.imgAddress);
+    setLargePhotoActive(true);
   }
 
   useEffect(() => {
     if (likedBy.indexOf(user) === -1) {
       setLike(false);
     }
-  }, []);
+  }, [likedBy, user]);
 
   return (
-    <ImageListItem sx={{position:'relative'}}
+    <ImageListItem
+      sx={{
+        position: "relative",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+        padding: "2px",
+        borderRadius: "2px",
+      }}
     >
       <img
         alt="hurro"
-        src={`${props.photo.imgAddress}?w=248&fit=crop&auto=format`}
-        srcSet={`${props.photo.imgAddress}?w=248&fit=crop&auto=format&dpr=2 2x`}
+        src={`${photo.imgAddress}?w=248&fit=crop&auto=format`}
+        srcSet={`${photo.imgAddress}?w=248&fit=crop&auto=format&dpr=2 2x`}
         onClick={largeHandle}
       />
-      {(user === owner || user === uploader) && (
-        <div className="bin" onClick={deleteHandle}>
-          <DeleteForeverIcon />
-        </div>
-      )}
-     
-      <div className="favorite-icon" onClick={likeHandle}>
-        {like ? (
-          <FavoriteIcon sx={{ color: 'red' }} />
-        ) : (
-          <FavoriteBorderIcon sx={{ color: 'red' }} />
-        )}
-      </div>
-      </ImageListItem>
+      <ImageListItemBar
+        position="below"
+        title={uploaderName}
+        actionIcon={
+          <div>
+            <Badge badgeContent={likedBy.length}>
+              {like ? (
+                <FavoriteIcon sx={{ color: "red" }} onClick={likeHandle} />
+              ) : (
+                <FavoriteBorderIcon
+                  sx={{ color: "red" }}
+                  onClick={likeHandle}
+                />
+              )}
+            </Badge>
+            <DeleteForeverIcon />
+          </div>
+        }
+      />
+    </ImageListItem>
   );
 }
 

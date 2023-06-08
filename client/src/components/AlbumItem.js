@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { deleteAlbum, getAlbum } from "../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
@@ -29,13 +28,15 @@ function AlbumItem({ album, userAlbums, setUserAlbums, setCurrentAlbum }) {
       key={album._id}
       
       sx={{
-        gap:2,
+        gap:10,
         "&::-webkit-scrollbar": {
           display: "none",
         },
+        margin:'5px',
         height: 200,
         minWidth: "300px",
         cursor: "pointer",
+        borderRadius:'10px'
       }}
       onClick={openAlbum}
     >
@@ -47,10 +48,10 @@ function AlbumItem({ album, userAlbums, setUserAlbums, setCurrentAlbum }) {
       <ImageListItemBar
         title={album.albumName}
         actionIcon={
-          <DeleteForeverIcon
-            onClick={removeAlbum}
-            style={{ color: "#ffffff" }}
-          />
+      <DeleteForeverIcon
+        onClick={removeAlbum}
+        style={{ color: "#ffffff" }}
+      />
         }
       />
     </ImageListItem>

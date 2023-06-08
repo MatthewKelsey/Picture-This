@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { out } from "../ApiClient";
 import "./Navbar.css";
-
+import { useDispatch } from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-function Navbar(props) {
+import  Badge  from "@mui/material/Badge";
+import MailIcon from '@mui/icons-material/Mail';
+import { toggleInvites } from "../notificationSlice";
+
+function Navbar({currentUser}) {
   let navigate = useNavigate();
+  const dispatch = useDispatch()
   const logout = () => {
     out();
     navigate("/");
@@ -14,16 +19,25 @@ function Navbar(props) {
   const handleHome = async () => {
     navigate("/profile");
   };
+  const inviteHandle = () => {
+    console.log('invite handle')
+    dispatch(toggleInvites())
+    // setInvitePopup(!invitePopup);
+  };
+
   return (
     <div className="nav-bar">
       <div className="home" onClick={handleHome}>
-        <HomeIcon></HomeIcon>
+        <HomeIcon sx={{marginLeft:'10px'}}></HomeIcon>
       </div>
       <div className="picture-this">
         <img src="../picturethis2.png" alt="logo"></img>
       </div>
-      <div className="logout-icon" onClick={logout}>
-        <LogoutIcon></LogoutIcon>
+      <div className="logout-icon" >
+     { Object.keys(currentUser).length ? <Badge badgeContent={currentUser.pendingInvite.length} color="secondary">
+  <MailIcon color="white" onClick={inviteHandle} />
+</Badge> : ''}
+        <LogoutIcon sx={{marginLeft:'50px', marginRight:'10px'}} onClick={logout}></LogoutIcon>
       </div>
     </div>
   );

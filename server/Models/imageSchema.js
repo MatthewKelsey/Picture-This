@@ -22,6 +22,11 @@ const imgSchema = new Schema({
     type: String,
     required: false,
   },
+  uploaderName: {
+    type: String,
+    required: false,
+
+  },
 
   likes: {
     type: Number,

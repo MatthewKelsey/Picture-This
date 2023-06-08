@@ -5,9 +5,11 @@ import MainAlbum from "./MainAlbum";
 import Uploader from "./Uploader";
 import EnlargedPhoto from "./EnlargedPhoto";
 // import { refreshUser } from "../ApiClient";
-
-function Main(props) {
-  const [photos, setPhotos] = useState(props.currentAlbum.photos);
+import ShareIcon from '@mui/icons-material/Share';
+function Main({  currentAlbum,
+  setCurrentUser,
+  currentUser}) {
+  const [photos, setPhotos] = useState(currentAlbum.photos);
   const [showUpload, setShowUpload] = useState(false);
   const [largePhoto, setLargePhoto] = useState("");
   const [largePhotoActive, setLargePhotoActive] = useState(false);
@@ -39,20 +41,18 @@ function Main(props) {
 
   return (
     <div className="main-container">
-      <div>
-        {" "}
-       
-      </div>
-      <br></br>
       
+     <h1>{currentAlbum.albumName}</h1>  
       <div className="main-album">
+       
         <MainAlbum
           photos={photos}
+          setPhotos={setPhotos}
           upDatePhotos={upDatePhotos}
           setLargePhoto={setLargePhoto}
           setLargePhotoActive={setLargePhotoActive}
-          currentUser={props.currentUser}
-          currentAlbum={props.currentAlbum}
+          currentUser={currentUser}
+          currentAlbum={currentAlbum}
         />
       </div>
       {showUpload && (
@@ -60,13 +60,15 @@ function Main(props) {
           setShowUpload={setShowUpload}
           photos={photos}
           setPhotos={setPhotos}
-          currentAlbum={props.currentAlbum}
+          currentAlbum={currentAlbum}
+          currentUser={currentUser}
+
         />
       )}
       {sharePopup && (
         <div className="add-album">
           <ShareAlbum
-            currentAlbum={props.currentAlbum}
+            currentAlbum={currentAlbum}
             setSharePopup={setSharePopup}
           />
         </div>
@@ -81,7 +83,7 @@ function Main(props) {
         +
       </div>
       <div className="share" onClick={share}>
-        <img src="../share.png" alt="hhh"></img>
+        <ShareIcon></ShareIcon>
       </div>
     </div>
   );

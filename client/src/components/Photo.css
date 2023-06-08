@@ -1,13 +1,17 @@
-.favorite-icon {
-  position: relative;
-  bottom: 60px;
-  left: 20px;
-  width: 50px
+.picture-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2px;
 }
 
 .bin {
-  position: relative;
-  bottom: 20px;
+  padding: 5px;
+}
 
-  left: 340px;
+.favourite-icon {
+  padding: 5px;
+}
+.bin img {
+  cursor: pointer;
 }

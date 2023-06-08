@@ -1,0 +1,30 @@
+
+
+
+.enlarged-photo {
+    background-color: blue;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* width: 60%; */
+    height: 70%;
+    top: 10%;
+    left: 50%;
+    padding: 20px;
+    transform: translate(-50%, 0);
+    margin: auto;
+    overflow: hidden;
+    flex-wrap: wrap;
+  }
+  
+  .enlarged-photo img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .enlarged-photo .p {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }

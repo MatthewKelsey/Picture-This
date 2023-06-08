@@ -1,10 +1,10 @@
 import React from "react";
-// import auth from '../utils/auth';
 import { login } from "../ApiClient";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../userSlice";
 
-import Navbar from "./Navbar";
 const initialState = {
   email: "",
   password: "",
@@ -12,6 +12,8 @@ const initialState = {
 
 function Login(props) {
   let navigate = useNavigate();
+  const currentUser = useSelector((state) => state.currentUser);
+  const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
 
   const handleChange = (e) => {
@@ -21,6 +23,7 @@ function Login(props) {
       [name]: value,
     }));
   };
+
   const moveToRegister = () => {
     navigate("/");
   };
@@ -31,12 +34,14 @@ function Login(props) {
     const { email, password } = state;
     const user = { email: email, password: password };
     const res = await login(user);
-    console.log(res)
     if (res.status === 401 || res.status === 400) {
-      alert(`Error`);
+      alert("Error");
       setState(initialState);
     } else {
+      console.log("hello");
       props.setCurrentUser(res);
+      dispatch(updateUser(res));
+      console.log(currentUser.email);
       navigate("/profile");
     }
   };
@@ -47,8 +52,7 @@ function Login(props) {
 
   return (
     <section className="register">
-     
-      <br></br>
+      <br />
       <img className="logoting" src="../logoting.png" alt="logo" />
 
       <h2>Login</h2>
@@ -60,7 +64,7 @@ function Login(props) {
           value={state.email}
           onChange={handleChange}
         />
-        <br></br>
+        <br />
         <input
           type="password"
           placeholder="supersecretthingy"
@@ -68,8 +72,12 @@ function Login(props) {
           value={state.password}
           onChange={handleChange}
         />
-        <br></br>
-        <button className="form-submit" type="submit" disabled={validateForm()}>
+        <br />
+        <button
+          className="form-submit"
+          type="submit"
+          disabled={validateForm()}
+        >
           &nbsp;Login&nbsp;
         </button>
       </form>
@@ -80,4 +88,5 @@ function Login(props) {
     </section>
   );
 }
+
 export default Login;

@@ -13,6 +13,7 @@ const Register = (props) => {
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [exists, setExists] = useState(false);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
