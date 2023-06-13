@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { uploadPhoto } from "../ApiClient";
 import "./Uploader.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addPhoto } from "../currentAlbumSlice";
 function Uploader(props) {
+  const currentAlbum = useSelector((state)=> state.currentAlbum.currentAlbum)
+  const currentUser = useSelector((state)=> state.currentUser.initialState)
+  const dispatch = useDispatch()
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState([]);
 
@@ -28,16 +33,17 @@ function Uploader(props) {
     e.preventDefault();
     for (let i = 0; i < previewSource.length; i++) {
      const newPhoto = await uploadPhoto({
-        album: props.currentAlbum._id,
+        album: currentAlbum._id,
         data: previewSource[i],
-        admin: props.currentAlbum.owner,
-        uploaderName: `${props.currentUser.firstName} ${props.currentUser.lastName}`
+        admin: currentAlbum.owner,
+        // uploaderName: `${currentUser.firstName} ${currentUser.lastName}`
 
       });
+      dispatch(addPhoto(newPhoto))
       setPreviewSource((prevState) =>
         prevState.filter((_, index) => index !== i)
       );
-      props.setPhotos([...props.photos , newPhoto ])
+      // props.setPhotos([...props.photos , newPhoto ])
     }
     props.setShowUpload(false);
   };

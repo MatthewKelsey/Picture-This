@@ -149,18 +149,6 @@ h1 {
   padding: 80px;
 }
 
-.add-album {
-  position: fixed;
-  bottom: 30%;
-  right: 30%;
-  max-height: 40%;
-  width: 40%;
-  border-color: #22031f;
-  border-style: dashed;
-  overflow: hidden;
-  border-radius: 10px;
-  background-color: aliceblue;
-}
 
 .form-submit {
   background-color: var(--primary);
@@ -187,25 +175,7 @@ h1 {
   right: 5px;
   cursor: pointer;
 }
-.invite-alert {
-  position: fixed;
-  bottom: 100px;
-  right: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 55px;
-  height: 55px;
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--light);
-  background-image: linear-gradient(to bottom right, red, var(--secondary));
-  border-radius: 999px;
-  cursor: pointer;
-}
-.invite-alert img {
-  max-height: 100%;
-}
+
 .share {
   position: fixed;
   bottom: 100px;
@@ -227,45 +197,6 @@ h1 {
 .share img {
   max-width: 70%;
 }
-.invite-popup {
-  position: fixed;
-  bottom: 20%;
-  right: 30%;
-  height: 60%;
-  width: 40%;
-  border-color: #22031f;
-  border-style: dashed;
-  overflow: hidden;
-  border-radius: 10px;
-  background-color: var(--primary);
-}
-
-.invite-item {
-  margin: 5px;
-  border-radius: 10px;
-  margin: 5px;
-  background-color: var(--light-alt);
-  display: flex;
-  flex-direction: row;
-  max-height: 10%;
-  justify-content: space-between;
-  max-width: 100%;
-}
-.invite-item p {
-  margin-left: 10px;
-}
-.accept {
-  display: flex;
-  justify-content: flex-end;
-  max-width: 30%;
-  max-height: 30%;
-}
-
-.accept img {
-  max-height: 100%;
-  max-width: 100%;
-  cursor: pointer;
-}
 
 
 .username {
@@ -283,10 +214,6 @@ h1 {
  
 }
 
-/* #root{
-  height: 100%;
-  width:100%
-} */
 
 .register{
   z-index: 10;

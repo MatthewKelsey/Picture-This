@@ -1,7 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { shareAlbumRequest } from "../ApiClient";
+import { useDispatch } from "react-redux";
+import './ShareAlbum.css';
 function ShareAlbum(props) {
+const dispatch  = useDispatch()
+
   const initialState = {
     email: "",
   };
@@ -15,12 +19,7 @@ function ShareAlbum(props) {
       email: email,
       albumId: props.currentAlbum._id,
     });
-    // const album = { albumName };
     props.setSharePopup(false);
-    // let newAlbum = await createAlbum(album);
-    let shared = props.sharedAlbums;
-    shared.push(res);
-    props.setSharedAlbums(shared);
   };
   const validateForm = () => {
     return !state.email;
@@ -37,7 +36,7 @@ function ShareAlbum(props) {
   };
 
   return (
-    <section className="register">
+    <section className="share-album">
       <br></br>
 
       <br></br>
@@ -45,7 +44,7 @@ function ShareAlbum(props) {
         X
       </div>
       <h2>Share Album </h2>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="share-album-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Email"
@@ -54,9 +53,7 @@ function ShareAlbum(props) {
           onChange={handleChange}
         />
         <br></br>
-        <button className="form-submit" type="submit" disabled={validateForm()}>
-          &nbsp;Share Album&nbsp;
-        </button>
+        <button className="form-submit" type="submit" disabled={validateForm()}> Submit </button>
       </form>
     </section>
   );

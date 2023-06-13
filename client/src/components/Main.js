@@ -5,11 +5,13 @@ import MainAlbum from "./MainAlbum";
 import Uploader from "./Uploader";
 import EnlargedPhoto from "./EnlargedPhoto";
 // import { refreshUser } from "../ApiClient";
+import Invites from "./Invites";
+import { useDispatch, useSelector } from "react-redux";
 import ShareIcon from '@mui/icons-material/Share';
-function Main({  currentAlbum,
-  setCurrentUser,
-  currentUser}) {
-  const [photos, setPhotos] = useState(currentAlbum.photos);
+function Main(props) {
+    const invitePopup = useSelector((state) => state.notifications.albumInvite)
+  const photos = useSelector((state) => state.currentAlbum.currentAlbum.photos);
+  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum)
   const [showUpload, setShowUpload] = useState(false);
   const [largePhoto, setLargePhoto] = useState("");
   const [largePhotoActive, setLargePhotoActive] = useState(false);
@@ -26,17 +28,17 @@ function Main({  currentAlbum,
     });
   };
 
-  const upDatePhotos = (id) => {
-    let upDatedPhotos = photos.filter((obj) => {
-      return obj._id !== id;
-    });
-    setPhotos(upDatedPhotos);
-  };
+  // const upDatePhotos = (id) => {
+  //   let upDatedPhotos = photos.filter((obj) => {
+  //     return obj._id !== id;
+  //   });
+  //   setPhotos(upDatedPhotos);
+  // };
 
-  useEffect(() => {
-    sortByFavourites();
+  // useEffect(() => {
+  //   sortByFavourites();
 
-  }, );
+  // }, );
 
 
   return (
@@ -47,11 +49,11 @@ function Main({  currentAlbum,
        
         <MainAlbum
           photos={photos}
-          setPhotos={setPhotos}
-          upDatePhotos={upDatePhotos}
+          // setPhotos={setPhotos}
+          // upDatePhotos={upDatePhotos}
           setLargePhoto={setLargePhoto}
           setLargePhotoActive={setLargePhotoActive}
-          currentUser={currentUser}
+          // currentUser={currentUser}
           currentAlbum={currentAlbum}
         />
       </div>
@@ -59,9 +61,9 @@ function Main({  currentAlbum,
         <Uploader
           setShowUpload={setShowUpload}
           photos={photos}
-          setPhotos={setPhotos}
+          // setPhotos={setPhotos}
           currentAlbum={currentAlbum}
-          currentUser={currentUser}
+          // currentUser={currentUser}
 
         />
       )}
@@ -85,6 +87,12 @@ function Main({  currentAlbum,
       <div className="share" onClick={share}>
         <ShareIcon></ShareIcon>
       </div>
+      {invitePopup ? (
+        <Invites
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

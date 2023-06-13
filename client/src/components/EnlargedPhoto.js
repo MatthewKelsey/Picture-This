@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import './EnlargedPhoto.css'
+import "./EnlargedPhoto.css";
 function EnlargedPhoto({ largePhoto, setLargePhotoActive }) {
   const close = () => setLargePhotoActive(false);
 
@@ -8,7 +8,7 @@ function EnlargedPhoto({ largePhoto, setLargePhotoActive }) {
     <div className="enlarged-photo">
       <img src={largePhoto} alt="Big" />
       <div className="close" onClick={close}>
-        <p>close</p>
+        <p>Close</p>
       </div>
     </div>
   );

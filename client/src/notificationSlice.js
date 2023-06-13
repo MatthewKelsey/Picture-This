@@ -3,16 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 export const notifications = createSlice({
   name: "notifications",
   initialState: {
-    albumInvite: true,
+    albumInvite: false,
+    sharePopup: false,
+    addAlbumPopup: false,
   },
   reducers: {
     toggleInvites: (state) => {
       state.albumInvite = !state.albumInvite;
-      console.log(state.albumInvite)
+    },
+    toggleSarePopup: (state) => {
+      state.sharePopup = !state.sharePopup;
+    },
+    toggleAddAlbumPopup: (state) => {
+      state.addAlbumPopup = !state.addAlbumPopup;
     },
   },
 });
 
-export const { toggleInvites } = notifications.actions;
+export const { toggleInvites, toggleSarePopup, toggleAddAlbumPopup } = notifications.actions;
 
 export default notifications.reducer;

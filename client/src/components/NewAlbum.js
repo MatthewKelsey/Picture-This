@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { createAlbum } from "../ApiClient";
 import { useDispatch } from "react-redux";
-import{addAlbum} from '../userSlice'
+import {  updateUploadedAlbums } from "../userSlice";
+import './NewAlbum.css'
+import { toggleAddAlbumPopup } from "../notificationSlice";
 function NewAlbum(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const initialState = {
     albumName: "",
   };
@@ -18,15 +20,13 @@ function NewAlbum(props) {
 
     let newAlbum = await createAlbum(album);
 
-    dispatch(addAlbum(newAlbum))
-   
-    props.setAlbumPopup(false);
+    dispatch(updateUploadedAlbums(newAlbum));
+
+    dispatch(toggleAddAlbumPopup())
   };
   const close = () => {
-    props.setAlbumPopup(false);
+    dispatch(toggleAddAlbumPopup())
   };
-  //   const loginHandle = () =>{
-  //     navigate("/login")}
 
   const validateForm = () => {
     return !state.albumName;
@@ -40,14 +40,12 @@ function NewAlbum(props) {
   };
 
   return (
-    <section className="register">
+    <section className="new-album-form">
       <br></br>
       <div onClick={close} className="top-right">
         X
       </div>
-      <div>
-        <img src="../picture-this1.png" alt="this"></img>
-      </div>
+    
 
       <br></br>
 

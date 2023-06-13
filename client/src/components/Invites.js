@@ -1,26 +1,17 @@
 import React from "react";
-import { useState } from "react";
-import { acceptInvite, rejectAlbum } from "../ApiClient";
 import InviteItem from "./InviteItem";
-
+import { useDispatch, useSelector } from "react-redux";
+import { toggleInvites } from "../notificationSlice";
+import "./Invites.css";
 function Invites(props) {
-  const { currentUser, sharedAlbums, setSharedAlbums, setPendingInvites, setInvitePopup } = props;
-  const [invites, setInvites] = useState(currentUser.pendingInvite);
-
+  const invites = useSelector((state) => state.currentUser.pendingInvite);
+  const dispatch = useDispatch();
   const close = () => {
-    setInvitePopup(false);
+    dispatch(toggleInvites());
   };
 
   let individualInvites = invites.map((invite) => (
-    <InviteItem
-      key={invite._id}
-      invite={invite}
-      setInvites={setInvites}
-      invites={invites}
-      sharedAlbums={sharedAlbums}
-      setSharedAlbums={setSharedAlbums}
-      setPendingInvites={setPendingInvites}
-    />
+    <InviteItem key={invite._id} invite={invite} />
   ));
 
   return (
@@ -28,7 +19,11 @@ function Invites(props) {
       <div onClick={close} className="top-right">
         X
       </div>
-      <h2>You have a pending album invite!</h2>
+      {invites.length ? (
+        <h2>You have {invites.length} pending album invites!</h2>
+      ) : (
+        <h2>You have no new shared album invites</h2>
+      )}
       {individualInvites}
     </div>
   );

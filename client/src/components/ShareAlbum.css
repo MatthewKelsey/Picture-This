@@ -1,0 +1,32 @@
+.share-album {
+    position: fixed;
+    bottom: 20%;
+    right: 30%;
+    height: 60%;
+    width: 40%;
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+
+  .share-album-form {
+    background-color: var(--primary);
+  }
+  .share-album-form button {
+    background-color: aliceblue;
+    color: black;
+    padding: 10px 20px; /* Add padding to adjust button size */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+  }
+  
+  

@@ -9,24 +9,29 @@ export const currentUser = createSlice({
     sharedAlbums: [],
     pendingInvite: [],
     uploadedAlbums: [],
+    _id: undefined,
   },
   reducers: {
-    addAlbum: (state, action) => {
-      state.uploadedAlbums.push(action.payload);
+    updateUploadedAlbums: (state, action) => {
+      state.uploadedAlbums = action.payload;
     },
-    deleteAlbum: (state, action) => {
-      state.uploadedAlbums = state.uploadedAlbums.filter(
-        (album) => album !== action.payload
-      );
-    },
+
     updatePending: (state, action) => {
+      console.log("reached pending", action.payload);
       state.pendingInvite = action.payload;
     },
     addSharedAlbum: (state, action) => {
       state.sharedAlbums.push(action.payload);
     },
     updateUser: (state, action) => {
-      const { email, firstName, lastName, sharedAlbums, pendingInvite, uploadedAlbums } = action.payload;
+      const {
+        email,
+        firstName,
+        lastName,
+        sharedAlbums,
+        pendingInvite,
+        uploadedAlbums,
+      } = action.payload;
       state.email = email;
       state.firstName = firstName;
       state.lastName = lastName;
@@ -37,6 +42,11 @@ export const currentUser = createSlice({
   },
 });
 
-export const { addAlbum, deleteAlbum, updatePending, addSharedAlbum, updateUser } = currentUser.actions;
+export const {
+  updatePending,
+  addSharedAlbum,
+  updateUser,
+  updateUploadedAlbums,
+} = currentUser.actions;
 
 export default currentUser.reducer;

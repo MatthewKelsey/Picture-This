@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { out } from "../ApiClient";
 import "./Navbar.css";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import  Badge  from "@mui/material/Badge";
 import MailIcon from '@mui/icons-material/Mail';
 import { toggleInvites } from "../notificationSlice";
+import Invites from "./Invites";
 
-function Navbar({currentUser}) {
+function Navbar(props) {
   let navigate = useNavigate();
   const dispatch = useDispatch()
+  const currentUser = useSelector((state)=> state.currentUser)
   const logout = () => {
     out();
     navigate("/");
@@ -20,11 +22,10 @@ function Navbar({currentUser}) {
     navigate("/profile");
   };
   const inviteHandle = () => {
-    console.log('invite handle')
     dispatch(toggleInvites())
-    // setInvitePopup(!invitePopup);
+    console.log('e')
   };
-
+const invitePopup = useSelector((state)=> state.notifications.invitePopup)
   return (
     <div className="nav-bar">
       <div className="home" onClick={handleHome}>
@@ -39,6 +40,8 @@ function Navbar({currentUser}) {
 </Badge> : ''}
         <LogoutIcon sx={{marginLeft:'50px', marginRight:'10px'}} onClick={logout}></LogoutIcon>
       </div>
+
+    
     </div>
   );
 }

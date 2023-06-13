@@ -16,7 +16,6 @@ exports.getPhotos = async (req, res) => {
 
 exports.uploadPhoto = async (req, res) => {
   try {
-    console.log(req.body)
     const fileStr = req.body.data;
     const album = await Album.findOne({ _id: req.body.album });
     const result = await cloudinary.uploader.upload(fileStr);
@@ -50,14 +49,14 @@ exports.addLike = async (req, res) => {
     if (likers.includes(req.session.uid)) {
       
       let index = likers.indexOf(req.session.uid);
-      console.log(index);
+ 
       likers.splice(index, [index + 1]);
-      console.log(likers);
+    
       currentPhoto.liked = likers;
       currentPhoto.save();
     } else {
       likers.push(req.session.uid);
-      console.log(likers);
+
       currentPhoto.liked = likers;
       currentPhoto.likes = currentPhoto.likes + 1;
       currentPhoto.save();

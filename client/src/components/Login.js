@@ -38,10 +38,7 @@ function Login(props) {
       alert("Error");
       setState(initialState);
     } else {
-      console.log("hello");
-      props.setCurrentUser(res);
       dispatch(updateUser(res));
-      console.log(currentUser.email);
       navigate("/profile");
     }
   };
@@ -73,11 +70,7 @@ function Login(props) {
           onChange={handleChange}
         />
         <br />
-        <button
-          className="form-submit"
-          type="submit"
-          disabled={validateForm()}
-        >
+        <button className="form-submit" type="submit" disabled={validateForm()}>
           &nbsp;Login&nbsp;
         </button>
       </form>

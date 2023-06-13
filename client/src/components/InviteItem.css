@@ -1,0 +1,29 @@
+.invite-item {
+  margin: 5px;
+  border-radius: 10px;
+  margin: 5px;
+  background-color: var(--light-alt);
+  display: flex;
+  flex-direction: row;
+  max-height: 10%;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+}
+.invite-item p {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.accept {
+  height: 100%;
+}
+.reject {
+  height: 100%;
+  margin: 5px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+}

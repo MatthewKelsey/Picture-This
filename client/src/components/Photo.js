@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { likePhoto, deletePhoto } from "../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -6,17 +6,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Photo.css";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import Badge from "@mui/material/Badge";
-
+import { useSelector , useDispatch} from "react-redux";
+import { removePhoto } from "../currentAlbumSlice";
 function Photo({
-  currentAlbum,
-  upDatePhotos,
-  key,
-  photo,
-  setLargePhoto,
-  setLargePhotoActive,
-  currentUser,
+  photo
 }) {
+  
+  const dispatch = useDispatch()
   const [like, setLike] = useState(true);
+  const currentUser =  useSelector((state) => state.currentUser)
+  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum)
   const user = currentUser._id;
   const likedBy = photo.liked;
   const owner = currentAlbum.owner;
@@ -24,8 +23,11 @@ function Photo({
   const uploaderName = photo.uploaderName;
 
   function deleteHandle() {
+    console.log(currentAlbum)
     deletePhoto(photo._id);
-    upDatePhotos(photo._id);
+   
+    const albumUpdate = 
+  dispatch(removePhoto(photo._id))
   }
 
   function likeHandle() {
@@ -34,8 +36,10 @@ function Photo({
   }
 
   function largeHandle() {
-    setLargePhoto(photo.imgAddress);
-    setLargePhotoActive(true);
+    // setLargePhoto(photo.imgAddress);
+    // setLargePhotoActive(true);
+    console.log(currentAlbum)
+    console.log('user', photo._id)
   }
 
   useEffect(() => {
@@ -74,7 +78,7 @@ function Photo({
                 />
               )}
             </Badge>
-            <DeleteForeverIcon />
+            <DeleteForeverIcon onClick={deleteHandle}/>
           </div>
         }
       />

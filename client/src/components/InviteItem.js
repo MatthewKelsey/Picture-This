@@ -1,29 +1,41 @@
 import React from "react";
 import { acceptInvite, rejectAlbum } from "../ApiClient";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePending, addSharedAlbum } from "../userSlice";
+import DoneIcon from "@mui/icons-material/Done";
+import CloseIcon from "@mui/icons-material/Close";
+import "./InviteItem.css";
 
-function InviteItem(props) {
-  const { invite, setInvites, invites, sharedAlbums, setSharedAlbums, setPendingInvites } = props;
-
+function InviteItem({ invite }) {
+  const dispatch = useDispatch();
+  const invites = useSelector((state) => state.currentUser.pendingInvite);
   const accept = async () => {
     let newShare = await acceptInvite({ albumId: invite._id });
-    setSharedAlbums([newShare, ...sharedAlbums]);
-    let remainingInvites = invites.filter((element) => element._id !== invite._id);
-    setInvites(remainingInvites);
-    setPendingInvites(remainingInvites);
+    dispatch(addSharedAlbum(newShare));
+    let remainingInvites = invites.filter(
+      (element) => element._id !== invite._id
+    );
+    dispatch(updatePending(remainingInvites));
   };
 
   const reject = async () => {
     await rejectAlbum(invite);
-    let remainingInvites = invites.filter((element) => element._id !== invite._id);
-    setInvites(remainingInvites);
+    let remainingInvites = invites.filter(
+      (element) => element._id !== invite._id
+    );
+    dispatch(updatePending(remainingInvites));
   };
 
   return (
     <div className="invite-item">
       <p>{invite.albumName}</p>
-      <div className="accept">
-        <img onClick={accept} alt="accept" src="../accept.png"></img>
-        <img src="../reject.png" alt="reject" onClick={reject}></img>
+      <div className="icons">
+        <div className="accept">
+          <DoneIcon onClick={accept}></DoneIcon>
+        </div>
+        <div className="reject">
+          <CloseIcon onClick={reject}></CloseIcon>
+        </div>
       </div>
     </div>
   );
