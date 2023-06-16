@@ -1,8 +1,14 @@
-.picture-icons {
+.photo-icons {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 2px;
+}
+
+.likes{
+  display: flex;
+  width: 40%;
+  justify-content: space-evenly;
+  color: grey;
 }
 
 .bin {

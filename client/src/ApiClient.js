@@ -28,13 +28,14 @@ export const uploadPhoto = async (content) => {
       body: JSON.stringify(content),
       credentials: "include",
     });
-    return response.json;
+    return response.json();
   } catch (error) {
     console.log(error);
   }
 };
 
 export const likePhoto = async (id) => {
+  console.log('inside like')
   try {
     const response = await fetch(root + "like", {
       method: "PUT",
@@ -44,7 +45,12 @@ export const likePhoto = async (id) => {
       body: JSON.stringify({ _id: id }),
       credentials: "include",
     });
-    return response.json;
+    
+    if (response.ok) {
+      return response.json;
+    } else {
+      throw new Error("Failed to like photo.");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -81,7 +87,9 @@ export const login = async (user) => {
     });
     const loggedUser = await response.json();
 
+    console.log(loggedUser)
     return loggedUser;
+    
   } catch (error) {
     console.log(error);
   }
@@ -125,7 +133,7 @@ export const out = async () => {
       body: JSON.stringify(),
       credentials: "include",
     });
-    const data = await response.json;
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
@@ -193,7 +201,7 @@ export const deleteAlbum = async (albumId) => {
       credentials: "include",
       mode: "cors",
     });
-    const data = await response.json;
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
@@ -258,7 +266,7 @@ export const removeSharedAlbum = async (albumId) => {
       credentials: "include",
       mode: "cors",
     });
-    const data = await response.json;
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);

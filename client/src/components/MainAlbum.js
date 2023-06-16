@@ -3,7 +3,9 @@ import Photo from "./Photo";
 import "./MainAlbum.css";
 import { ImageList} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-function MainAlbum(props) {
+function MainAlbum({setLargePhoto, setLargePhotoActive ,currentIndex,
+  setCurrentIndex
+}) {
 const photos = useSelector((state)=> state.currentAlbum.currentAlbum.photos)
 
   return (
@@ -14,11 +16,16 @@ const photos = useSelector((state)=> state.currentAlbum.currentAlbum.photos)
         gap={20}
         sx={{ width: "100%", overflowY: "auto" }}
       >
-        {photos.map((photo) => (
+        {photos && photos.map((photo, index) => (
          
           <Photo
+          currentIndex= {currentIndex}
+          setCurrentIndex={setCurrentIndex}
+
+            index={index}
             photo={photo}
-            
+            setLargePhoto={setLargePhoto}
+            setLargePhotoActive={setLargePhotoActive}
           />
         ))}
       </ImageList>

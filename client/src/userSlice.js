@@ -9,7 +9,7 @@ export const currentUser = createSlice({
     sharedAlbums: [],
     pendingInvite: [],
     uploadedAlbums: [],
-    _id: undefined,
+    _id: "user",
   },
   reducers: {
     updateUploadedAlbums: (state, action) => {
@@ -23,6 +23,10 @@ export const currentUser = createSlice({
     addSharedAlbum: (state, action) => {
       state.sharedAlbums.push(action.payload);
     },
+    updateSharedAlbum: (state, action) =>{
+      state.sharedAlbums = action.payload
+    },
+
     updateUser: (state, action) => {
       const {
         email,
@@ -31,6 +35,7 @@ export const currentUser = createSlice({
         sharedAlbums,
         pendingInvite,
         uploadedAlbums,
+        _id
       } = action.payload;
       state.email = email;
       state.firstName = firstName;
@@ -38,11 +43,13 @@ export const currentUser = createSlice({
       state.sharedAlbums = sharedAlbums;
       state.pendingInvite = pendingInvite;
       state.uploadedAlbums = uploadedAlbums;
+      state._id = _id
     },
   },
 });
 
 export const {
+  updateSharedAlbum,
   updatePending,
   addSharedAlbum,
   updateUser,

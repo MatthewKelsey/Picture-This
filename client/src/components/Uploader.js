@@ -36,8 +36,6 @@ function Uploader(props) {
         album: currentAlbum._id,
         data: previewSource[i],
         admin: currentAlbum.owner,
-        // uploaderName: `${currentUser.firstName} ${currentUser.lastName}`
-
       });
       dispatch(addPhoto(newPhoto))
       setPreviewSource((prevState) =>

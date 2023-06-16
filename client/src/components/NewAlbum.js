@@ -2,11 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { createAlbum } from "../ApiClient";
 import { useDispatch } from "react-redux";
-import {  updateUploadedAlbums } from "../userSlice";
-import './NewAlbum.css'
+import { updateUploadedAlbums } from "../userSlice";
+import "./NewAlbum.css";
 import { toggleAddAlbumPopup } from "../notificationSlice";
+import { updateCurrentAlbum } from "../currentAlbumSlice";
+import { useNavigate } from "react-router-dom";
 function NewAlbum(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialState = {
     albumName: "",
   };
@@ -22,10 +25,12 @@ function NewAlbum(props) {
 
     dispatch(updateUploadedAlbums(newAlbum));
 
-    dispatch(toggleAddAlbumPopup())
+    dispatch(toggleAddAlbumPopup());
+    dispatch(updateCurrentAlbum(newAlbum));
+    navigate('/main')
   };
   const close = () => {
-    dispatch(toggleAddAlbumPopup())
+    dispatch(toggleAddAlbumPopup());
   };
 
   const validateForm = () => {
@@ -45,7 +50,6 @@ function NewAlbum(props) {
       <div onClick={close} className="top-right">
         X
       </div>
-    
 
       <br></br>
 

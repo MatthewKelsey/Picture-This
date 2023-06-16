@@ -41,7 +41,7 @@ function Profile(props) {
               }}
               cols={2.5}
             >
-              {userAlbums &&
+              {Array.isArray(userAlbums) &&
                 userAlbums.map((album) => (
 
                   <AlbumItem

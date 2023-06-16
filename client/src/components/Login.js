@@ -39,6 +39,7 @@ function Login(props) {
       setState(initialState);
     } else {
       dispatch(updateUser(res));
+      console.log(res)
       navigate("/profile");
     }
   };

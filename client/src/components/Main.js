@@ -16,6 +16,7 @@ function Main(props) {
   const [largePhoto, setLargePhoto] = useState("");
   const [largePhotoActive, setLargePhotoActive] = useState(false);
   const [sharePopup, setSharePopup] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0)
   const share = () => {
     setSharePopup(!sharePopup);
    
@@ -28,19 +29,7 @@ function Main(props) {
     });
   };
 
-  // const upDatePhotos = (id) => {
-  //   let upDatedPhotos = photos.filter((obj) => {
-  //     return obj._id !== id;
-  //   });
-  //   setPhotos(upDatedPhotos);
-  // };
-
-  // useEffect(() => {
-  //   sortByFavourites();
-
-  // }, );
-
-
+ 
   return (
     <div className="main-container">
       
@@ -49,11 +38,12 @@ function Main(props) {
        
         <MainAlbum
           photos={photos}
-          // setPhotos={setPhotos}
-          // upDatePhotos={upDatePhotos}
+          currentIndex= {currentIndex}
+          setCurrentIndex={setCurrentIndex}
+
           setLargePhoto={setLargePhoto}
           setLargePhotoActive={setLargePhotoActive}
-          // currentUser={currentUser}
+
           currentAlbum={currentAlbum}
         />
       </div>
@@ -79,6 +69,8 @@ function Main(props) {
         <EnlargedPhoto
           setLargePhotoActive={setLargePhotoActive}
           largePhoto={largePhoto}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
         />
       )}
       <div onClick={setShowUpload} className="add-photo">

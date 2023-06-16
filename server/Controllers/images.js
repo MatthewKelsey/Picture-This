@@ -39,9 +39,10 @@ exports.uploadPhoto = async (req, res) => {
 };
 
 exports.addLike = async (req, res) => {
+ 
   try {
     let currentPhoto = await Img.findOne({ _id: req.body._id });
-
+    console.log(currentPhoto)
     let uid = req.session.uid;
     let likers = currentPhoto.liked;
 

@@ -8,7 +8,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import  Badge  from "@mui/material/Badge";
 import MailIcon from '@mui/icons-material/Mail';
 import { toggleInvites } from "../notificationSlice";
-import Invites from "./Invites";
+import { refreshUser } from "../ApiClient";
+import { updateUser } from "../userSlice";
+
 
 function Navbar(props) {
   let navigate = useNavigate();
@@ -19,13 +21,15 @@ function Navbar(props) {
     navigate("/");
   };
   const handleHome = async () => {
+    const user = await refreshUser()
+    dispatch(updateUser(user))
     navigate("/profile");
   };
   const inviteHandle = () => {
     dispatch(toggleInvites())
     console.log('e')
   };
-const invitePopup = useSelector((state)=> state.notifications.invitePopup)
+
   return (
     <div className="nav-bar">
       <div className="home" onClick={handleHome}>

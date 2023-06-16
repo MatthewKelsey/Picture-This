@@ -22,7 +22,6 @@ function AlbumItem({ album }) {
   }, [album._id, userAlbums, dispatch]);
 
   const openAlbum = useCallback(async () => {
-    console.log(album)
     dispatch(updateCurrentAlbum(album));
     navigate("/main");
   }, [album, navigate, dispatch]);
@@ -36,31 +35,34 @@ function AlbumItem({ album }) {
           display: "none",
         },
         margin: "5px",
-        height: 200,
-        minWidth: "300px",
+        minWidth: "20%",
+        maxWidth: "20%",
         cursor: "pointer",
         borderRadius: "10px",
+        boxShadow: "1px 1px 2px 1px rgba(0, 0, 0, 0.3)",
       }}
-      onClick={openAlbum}
     >
       {album.photos[0] ? (
-        <img alt="album" src={album.photos[0].imgAddress} loading="lazy" />
+        <img
+          alt="album"
+          src={album.photos[0].imgAddress}
+          loading="lazy"
+          onClick={openAlbum}
+        />
       ) : (
-        <h1>+</h1>
+        <h1 onClick={openAlbum}>+</h1>
       )}
       <ImageListItemBar
         title={album.albumName}
         actionIcon={
           <DeleteForeverIcon
             onClick={removeAlbum}
-            style={{ color: "#ffffff" }}
+            style={{ color: "#ffffff", zIndex: 10 }}
           />
         }
       />
     </ImageListItem>
   );
 }
-
-
 
 export default AlbumItem;

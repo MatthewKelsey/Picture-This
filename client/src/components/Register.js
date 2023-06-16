@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { reg } from "../ApiClient";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../userSlice";
+
 import './Register.css'
 const initialState = {
   email: "",
@@ -10,6 +13,7 @@ const initialState = {
 };
 
 const Register = (props) => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [exists, setExists] = useState(false);
@@ -33,7 +37,7 @@ const Register = (props) => {
       setState(initialState);
       setExists(true);
     } else {
-      props.setCurrentUser(res);
+      dispatch(updateUser(res))
       navigate("/profile");
     }
   };

@@ -1,59 +1,60 @@
 import React from "react";
-import { getAlbum, removeSharedAlbum } from "../ApiClient";
+import { removeSharedAlbum } from "../ApiClient";
 import { useNavigate } from "react-router-dom";
-import { ImageListItem , ImageListItemBar} from "@mui/material";
+import { ImageListItem, ImageListItemBar } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useSelector, useDispatch } from "react-redux";
+import { updateSharedAlbum } from "../userSlice";
+import { updateCurrentAlbum } from "../currentAlbumSlice";
 
-function SharedAlbumItem({album, sharedAlbums, setSharedAlbums, setCurrentAlbum}) {
+
+function SharedAlbumItem({ album}) {
+  const sharedAlbums = useSelector((state) => state.currentUser.sharedAlbums);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const removeAlbum = async () => {
-   
-    removeSharedAlbum(album._id);
-    let newAlbumCollection = sharedAlbums;
-    const index = newAlbumCollection.findIndex((element) => {
-      return element._id === album._id;
+   await removeSharedAlbum(album._id);
+    const filteredAlbumList = sharedAlbums.filter((albumItem) => {
+      return albumItem._id !== album._id;
     });
-    newAlbumCollection.splice(index, 1);
-    setSharedAlbums([...newAlbumCollection]);
-  
+    dispatch(updateSharedAlbum(filteredAlbumList));
   };
 
-
   const openAlbum = async () => {
-    const currentAlbum = await getAlbum(album._id);
-    setCurrentAlbum(currentAlbum);
+    dispatch(updateCurrentAlbum(album))
     navigate("/main-share");
   };
 
   return (
     <ImageListItem
-      key={album._id}
-      
-      sx={{
-        gap:10,
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
-        margin:'5px',
-        height: 200,
-        minWidth: "300px",
-        cursor: "pointer",
-        borderRadius:'10px'
+    key={album._id}
+    sx={{
+      gap: 10,
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
+      margin: "5px",
+      minWidth: "20%",
+      maxWidth: "20%",
+      cursor: "pointer",
+      borderRadius: "10px",
+      boxShadow: "1px 1px 2px 1px rgba(0, 0, 0, 0.3)",
       }}
       onClick={openAlbum}
     >
       {album.photos[0] ? (
-        <img alt="album" src={album.photos[0].imgAddress} loading="lazy"/>
+        <img alt="album" src={album.photos[0].imgAddress} loading="lazy" />
       ) : (
         <h1>+</h1>
       )}
       <ImageListItemBar
         title={album.albumName}
         actionIcon={
-      <DeleteForeverIcon
-        onClick={removeAlbum}
-        style={{ color: "#ffffff" }}
-      />
+          <DeleteForeverIcon
+            onClick={removeAlbum}
+            style={{ color: "#ffffff" }}
+          />
         }
       />
     </ImageListItem>

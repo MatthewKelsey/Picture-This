@@ -1,21 +1,24 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { likePhoto, deletePhoto } from "../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Photo.css";
-import { ImageListItem, ImageListItemBar } from "@mui/material";
-import Badge from "@mui/material/Badge";
-import { useSelector , useDispatch} from "react-redux";
+import { ImageListItem } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import { removePhoto } from "../currentAlbumSlice";
+
 function Photo({
-  photo
+  photo,
+  setLargePhotoActive,
+  index,
+  currentIndex,
+  setCurrentIndex,
 }) {
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [like, setLike] = useState(true);
-  const currentUser =  useSelector((state) => state.currentUser)
-  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum)
+  const currentUser = useSelector((state) => state.currentUser);
+  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
   const user = currentUser._id;
   const likedBy = photo.liked;
   const owner = currentAlbum.owner;
@@ -23,11 +26,9 @@ function Photo({
   const uploaderName = photo.uploaderName;
 
   function deleteHandle() {
-    console.log(currentAlbum)
+  
     deletePhoto(photo._id);
-   
-    const albumUpdate = 
-  dispatch(removePhoto(photo._id))
+    const albumUpdate = dispatch(removePhoto(photo._id));
   }
 
   function likeHandle() {
@@ -36,10 +37,8 @@ function Photo({
   }
 
   function largeHandle() {
-    // setLargePhoto(photo.imgAddress);
-    // setLargePhotoActive(true);
-    console.log(currentAlbum)
-    console.log('user', photo._id)
+    setCurrentIndex(index);
+    setLargePhotoActive(true);
   }
 
   useEffect(() => {
@@ -55,6 +54,8 @@ function Photo({
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
         padding: "2px",
         borderRadius: "2px",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <img
@@ -63,25 +64,27 @@ function Photo({
         srcSet={`${photo.imgAddress}?w=248&fit=crop&auto=format&dpr=2 2x`}
         onClick={largeHandle}
       />
-      <ImageListItemBar
-        position="below"
-        title={uploaderName}
-        actionIcon={
-          <div>
-            <Badge badgeContent={likedBy.length}>
-              {like ? (
-                <FavoriteIcon sx={{ color: "red" }} onClick={likeHandle} />
-              ) : (
-                <FavoriteBorderIcon
-                  sx={{ color: "red" }}
-                  onClick={likeHandle}
-                />
-              )}
-            </Badge>
-            <DeleteForeverIcon onClick={deleteHandle}/>
-          </div>
-        }
-      />
+      <div className="photo-icons">
+        <div className="likes">
+          {like ? (
+            <FavoriteIcon sx={{ color: "grey" }} onClick={likeHandle} />
+          ) : (
+            <FavoriteBorderIcon sx={{ color: "grey" }} onClick={likeHandle} />
+          )}
+          {likedBy.length ? likedBy.length : ""}
+        </div>
+        {photo.uploader === user ? (
+          <DeleteForeverIcon
+            sx={{ color: "grey", marginRight: "10px" }}
+            onClick={deleteHandle}
+          />
+        ) : (
+          ""
+        )}
+      </div>
+      <div className="title-bar">
+        <span>{photo.title}</span>
+      </div>
     </ImageListItem>
   );
 }

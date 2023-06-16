@@ -11,7 +11,7 @@
     overflow: scroll;
     display: flex;
     max-width: 80%;
-    height: 90%;
+    height: 85%;
     z-index: 5;
   }
   .main-album::-webkit-scrollbar {
