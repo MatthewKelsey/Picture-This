@@ -28,18 +28,28 @@ function SharedAlbumItem({ album}) {
 
   return (
     <ImageListItem
-    key={album._id}
-    sx={{
-      gap: 10,
-      "&::-webkit-scrollbar": {
-        display: "none",
-      },
-      margin: "5px",
-      minWidth: "20%",
-      maxWidth: "20%",
-      cursor: "pointer",
-      borderRadius: "10px",
-      boxShadow: "1px 1px 2px 1px rgba(0, 0, 0, 0.3)",
+     key={album._id}
+      sx={{
+        gap: 10,
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+        margin: "5px",
+        minWidth: { 
+          xs: '250px !important',
+          sm: '300px !important',
+          md: '350px !important',
+          
+        },
+        maxWidth: "20%",
+        cursor: "pointer",
+        borderRadius: "10px",
+        boxShadow: "1px 1px 2px 1px rgba(0, 0, 0, 0.3)",
+        "@media (max-width: 768px)": {
+          minWidth: "250px",
+          maxWidth: "250px",
+        },
+      
       }}
       onClick={openAlbum}
     >

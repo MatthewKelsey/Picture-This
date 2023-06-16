@@ -12,9 +12,15 @@ const photos = useSelector((state)=> state.currentAlbum.currentAlbum.photos)
     <div>
       <ImageList
         variant="masonry"
-        cols={4}
+       
         gap={20}
-        sx={{ width: "100%", overflowY: "auto" }}
+        sx={{ columnCount: { 
+          xs: '2 !important',
+          sm: '2 !important',
+          md: '3 !important',
+          lg: '4 !important',
+          xl: '5 !important',
+        }, width: "100%", overflowY: "auto" }}
       >
         {photos && photos.map((photo, index) => (
          

@@ -17,3 +17,11 @@
   .main-album::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 468px) {
+    .main-album{
+      max-width: 95%;
+      
+    }
+    
+  }

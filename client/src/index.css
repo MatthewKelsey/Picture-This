@@ -113,15 +113,7 @@ h1 {
 
 
 
-.close {
-  position: absolute;
-  bottom: 20%;
-  right: 10%;
-  color: red;
-  text-shadow: 2px 2px 5px black;
-  z-index: 5;
-  font-size: 20px;
-}
+
 
 .album-item {
   display: flex;
