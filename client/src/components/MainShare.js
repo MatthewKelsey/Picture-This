@@ -1,62 +1,43 @@
 import React from "react";
-
 import ShareAlbum from "./ShareAlbum";
 import { useState } from "react";
 import MainAlbum from "./MainAlbum";
 import Uploader from "./Uploader";
-
 import EnlargedPhoto from "./EnlargedPhoto";
+import "./Main.css";
+import Invites from "./Invites";
+import { useSelector } from "react-redux";
+
 function MainShare(props) {
-  const [photos, setPhotos] = useState(props.currentAlbum.photos);
+  const invitePopup = useSelector((state) => state.notifications.albumInvite);
+  const photos = useSelector((state) => state.currentAlbum.currentAlbum.photos);
+  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
   const [showUpload, setShowUpload] = useState(false);
   const [largePhoto, setLargePhoto] = useState("");
   const [largePhotoActive, setLargePhotoActive] = useState(false);
   const [sharePopup, setSharePopup] = useState(false);
-  // const share = () => {
-  //   setSharePopup(!sharePopup);
-  // };
-
-  // const sortByFavourites = async () => {
-  //   let allPhotos = photos;
-  //   allPhotos.sort((a, b) => {
-  //     return b.likes - a.likes;
-  //   });
-  //   setPopularPhotos(allPhotos);
-  // };
-
-  const upDatePhotos = (id) => {
-    let upDatedPhotos = photos.filter((obj) => {
-      return obj._id !== id;
-    });
-    setPhotos(upDatedPhotos);
-  };
-
-
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <div className="main-container">
-      <div>
-        {" "}
-       
-      </div>
+      <div> </div>
       <br></br>
-      
+
       <div className="main-album">
         <MainAlbum
-          currentAlbum={props.currentAlbum}
           photos={photos}
-          upDatePhotos={upDatePhotos}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
           setLargePhoto={setLargePhoto}
           setLargePhotoActive={setLargePhotoActive}
-          currentUser={props.currentUser}
+          currentAlbum={currentAlbum}
         />
       </div>
       {showUpload && (
         <Uploader
           setShowUpload={setShowUpload}
           photos={photos}
-          setPhotos={setPhotos}
-          currentAlbum={props.currentAlbum}
+          currentAlbum={currentAlbum}
         />
       )}
       {sharePopup && (
@@ -71,11 +52,14 @@ function MainShare(props) {
         <EnlargedPhoto
           setLargePhotoActive={setLargePhotoActive}
           largePhoto={largePhoto}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
         />
       )}
       <div onClick={setShowUpload} className="add-photo">
         +
       </div>
+      {invitePopup ? <Invites /> : ""}
     </div>
   );
 }

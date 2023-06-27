@@ -1,4 +1,4 @@
-const root = "http://localhost:4001/";
+const root = "http://localhost:4002/";
 
 export const getAllPhotos = async () => {
   try {

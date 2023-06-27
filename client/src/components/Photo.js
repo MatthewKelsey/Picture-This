@@ -3,11 +3,12 @@ import { likePhoto, deletePhoto } from "../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import DownloadIcon from '@mui/icons-material/Download';
 import "./Photo.css";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { removePhoto } from "../currentAlbumSlice";
+import {Badge} from "@mui/material";
 
 function Photo({
   photo,
@@ -51,7 +52,7 @@ function Photo({
     <ImageListItem
       sx={{
         position: "relative",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+        // boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
         padding: "2px",
         borderRadius: "2px",
         display: "flex",
@@ -68,12 +69,20 @@ function Photo({
    sx={{height:'28px'}}
   position="bottom"
   actionPosition="right"
-  actionIcon={<DeleteForeverIcon sx={{ color: "white" }} />}
-  subtitle={ <>
-  {like ? (
-    <FavoriteIcon sx={{ color: "white" }} onClick={likeHandle} />
+  actionIcon={<div> <DownloadIcon sx={{ color: '#fafafa' }} />{photo.uploader === user ? (
+    <DeleteForeverIcon
+      sx={{ color: "white", marginRight: "10px" }}
+      onClick={deleteHandle}
+    />
   ) : (
-    <FavoriteBorderIcon sx={{ color: "white" }} onClick={likeHandle} />
+    ""
+  )}  </div>}
+  subtitle={ <>
+  {like ? (<Badge>
+    <FavoriteIcon sx={{ color: "white" }} onClick={likeHandle} /></Badge>
+  ) : (
+    <Badge>
+    <FavoriteBorderIcon sx={{ color: "white" }} onClick={likeHandle} /></Badge>
   )}
   {likedBy.length ? likedBy.length : ""}</> 
 }
@@ -87,14 +96,7 @@ function Photo({
           )}
           {likedBy.length ? likedBy.length : ""}
         </div> */}
-        {/* {photo.uploader === user ? (
-          <DeleteForeverIcon
-            sx={{ color: "grey", marginRight: "10px" }}
-            onClick={deleteHandle}
-          />
-        ) : (
-          ""
-        )} */}
+         
       </div>
       <div className="title-bar">
         <span>{photo.title}</span>

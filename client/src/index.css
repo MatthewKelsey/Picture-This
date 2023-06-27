@@ -79,22 +79,6 @@ h1 {
   max-height: 10%;
   max-width: 80%;
 }
-.add-photo {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 55px;
-  height: 55px;
-  font-size: 48px;
-  font-weight: 500;
-  color: var(--secondary);
-  background-color: var(--primary);
-  border-radius: 999px;
-  cursor: pointer;
-}
 
 
 .pop {
@@ -166,28 +150,6 @@ h1 {
   position: absolute;
   right: 5px;
   cursor: pointer;
-}
-
-.share {
-  position: fixed;
-  bottom: 100px;
-  right: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 55px;
-  height: 55px;
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--light);
-  background-color: var(--primary);
-  border-radius: 999px;
-  cursor: pointer;
-  z-index: 15;
-}
-
-.share img {
-  max-width: 70%;
 }
 
 
