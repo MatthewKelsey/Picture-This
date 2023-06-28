@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPhoto } from "../currentAlbumSlice";
 function Uploader(props) {
   const currentAlbum = useSelector((state)=> state.currentAlbum.currentAlbum)
-  const currentUser = useSelector((state)=> state.currentUser.initialState)
+  // const currentUser = useSelector((state)=> state.currentUser.initialState)
   const dispatch = useDispatch()
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState([]);
