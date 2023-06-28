@@ -14,22 +14,23 @@ function Photo({
   photo,
   setLargePhotoActive,
   index,
-  currentIndex,
+ 
   setCurrentIndex,
 }) {
   const dispatch = useDispatch();
   const [like, setLike] = useState(true);
   const currentUser = useSelector((state) => state.currentUser);
-  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
+  // const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
   const user = currentUser._id;
   const likedBy = photo.liked;
-  const owner = currentAlbum.owner;
-  const uploader = photo.uploader;
-  const uploaderName = photo.uploaderName;
+  // const owner = currentAlbum.owner;
+  // const uploader = photo.uploader;
+  // const uploaderName = photo.uploaderName;
 
   function deleteHandle() {
     deletePhoto(photo._id);
-    const albumUpdate = dispatch(removePhoto(photo._id));
+    // const albumUpdate = 
+    dispatch(removePhoto(photo._id));
   }
 
   function likeHandle() {

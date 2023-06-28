@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { shareAlbumRequest } from "../ApiClient";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import './ShareAlbum.css';
 function ShareAlbum(props) {
-const dispatch  = useDispatch()
+
 
   const initialState = {
     email: "",
@@ -15,7 +15,8 @@ const dispatch  = useDispatch()
     e.preventDefault();
 
     const { email } = state;
-    const res = await shareAlbumRequest({
+    // const res =
+     await shareAlbumRequest({
       email: email,
       albumId: props.currentAlbum._id,
     });

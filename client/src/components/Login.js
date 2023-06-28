@@ -2,7 +2,7 @@ import React from "react";
 import { login } from "../ApiClient";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { updateUser } from "../userSlice";
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
 
 function Login(props) {
   let navigate = useNavigate();
-  const currentUser = useSelector((state) => state.currentUser);
+  // const currentUser = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
 
