@@ -7,7 +7,7 @@ import { ImageList } from "@mui/material";
 import "./Profile.css";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleAddAlbumPopup } from "../notificationSlice";
-import { updateCurrentAlbum } from "../currentAlbumSlice";
+
 
 function Profile(props) {
   const currentUser = useSelector((state) => state.currentUser);

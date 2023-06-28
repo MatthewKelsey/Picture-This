@@ -1,13 +1,12 @@
-import Reactfrom from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./EnlargedPhoto.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
-import { useSelector, useDispatch } from "react-redux";
+
+import { useSelector } from "react-redux";
 function EnlargedPhoto({ setLargePhotoActive, currentIndex, setCurrentIndex }) {
   const close = () => setLargePhotoActive(false);
   const currentAlbum = useSelector(
