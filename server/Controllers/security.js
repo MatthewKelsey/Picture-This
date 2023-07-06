@@ -38,7 +38,6 @@ exports.refreshUser = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const email = req.body.email;
-
     const user = await User.findOne({ email: email }).populate({
       path: "uploadedAlbums sharedAlbums pendingInvite",
       populate: { path: "photos" },
@@ -47,7 +46,6 @@ exports.login = async (req, res) => {
       const valid = await bcrypt.compare(req.body.password, user.password);
       if (valid) {
         req.session.uid = user._id;
-
         res.status(200).send(user);
       }
     }
