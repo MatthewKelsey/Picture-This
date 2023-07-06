@@ -1,4 +1,5 @@
-const root = "http://localhost:4002/";
+// const root = "http://localhost:8080/"
+const root = "https://picture-server.fly.dev/";
 
 export const getAllPhotos = async () => {
   try {
@@ -14,7 +15,6 @@ export const getAllPhotos = async () => {
 };
 
 export const uploadPhoto = async (content) => {
-  
   try {
     const response = await fetch(root + "upload", {
       method: "POST",
@@ -35,7 +35,7 @@ export const uploadPhoto = async (content) => {
 };
 
 export const likePhoto = async (id) => {
-  console.log('inside like')
+  console.log("inside like");
   try {
     const response = await fetch(root + "like", {
       method: "PUT",
@@ -45,7 +45,7 @@ export const likePhoto = async (id) => {
       body: JSON.stringify({ _id: id }),
       credentials: "include",
     });
-    
+
     if (response.ok) {
       return response.json;
     } else {
@@ -87,9 +87,8 @@ export const login = async (user) => {
     });
     const loggedUser = await response.json();
 
-    console.log(loggedUser)
+    console.log(loggedUser);
     return loggedUser;
-    
   } catch (error) {
     console.log(error);
   }
@@ -294,4 +293,3 @@ export const rejectAlbum = async (albumId) => {
     console.log(error);
   }
 };
-

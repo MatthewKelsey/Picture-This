@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = process.env.PORT || 4002;
-const router = require("./router");
+const port = process.env.internal_port || 8080;
+const router = require("./router.js");
 const session = require("express-session");
 
 app.use(
@@ -20,7 +20,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:["http://localhost:3000", "https://taupe-bubblegum-4c2bb3.netlify.app"],
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
     credentials: true,
   })

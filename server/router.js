@@ -7,7 +7,7 @@ const router = Router();
 const albums = require("./Controllers/albums");
 
 //Photo routes
-router.get("/", authMiddleware, images.getPhotos);
+router.get("/",  images.getPhotos);
 router.post("/upload", authMiddleware, images.uploadPhoto);
 router.delete("/delete", authMiddleware, images.deletePhoto);
 router.put("/like", authMiddleware, images.addLike);
