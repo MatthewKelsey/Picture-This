@@ -21,8 +21,8 @@ function Navbar(props) {
     navigate("/");
   };
   const handleHome = async () => {
-    const user = await refreshUser()
-    dispatch(updateUser(user))
+    // const user = await refreshUser()
+    // dispatch(updateUser(user))
     navigate("/profile");
   };
   const inviteHandle = () => {
