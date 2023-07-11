@@ -8,8 +8,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import  Badge  from "@mui/material/Badge";
 import MailIcon from '@mui/icons-material/Mail';
 import { toggleInvites } from "../notificationSlice";
-import { refreshUser } from "../ApiClient";
-import { updateUser } from "../userSlice";
+// import { refreshUser } from "../ApiClient";
+// import { updateUser } from "../userSlice";
 
 
 function Navbar(props) {
