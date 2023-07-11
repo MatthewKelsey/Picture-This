@@ -21,7 +21,7 @@ app.use(
 
 app.use(
   cors({
-    origin:["http://localhost:3000", "https://picturingthis.netlify.app"],
+    origin:["http://localhost:3000", "https://picturingthis.netlify.app", "https://main--picturingthis.netlify.app"],
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
     credentials: true,
   })
