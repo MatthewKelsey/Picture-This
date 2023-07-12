@@ -12,6 +12,7 @@ function NewAlbum(props) {
   const navigate = useNavigate();
   const initialState = {
     albumName: "",
+    photos : []
   };
   const [state, setState] = useState(initialState);
 
@@ -24,7 +25,8 @@ function NewAlbum(props) {
     let newAlbum = await createAlbum(album);
 
     dispatch(updateUploadedAlbums(newAlbum));
-
+    dispatch(updateCurrentAlbum(newAlbum));
+    console.log(newAlbum)
     dispatch(toggleAddAlbumPopup());
     dispatch(updateCurrentAlbum(newAlbum));
     navigate('/main')
