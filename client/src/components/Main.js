@@ -10,7 +10,7 @@ import {  useSelector } from "react-redux";
 import ShareIcon from "@mui/icons-material/Share";
 function Main(props) {
   const invitePopup = useSelector((state) => state.notifications.albumInvite);
-  const photos = useSelector((state) => state.currentAlbum.currentAlbum.photos);
+  const photos = useSelector((state) => state.currentAlbum.currentAlbum.photos) || [];
   const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
   const [showUpload, setShowUpload] = useState(false);
   const [largePhoto, setLargePhoto] = useState("");
