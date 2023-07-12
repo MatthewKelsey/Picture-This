@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const currentAlbumSlice = createSlice({
   name: "currentAlbum",
   initialState: {
-    currentAlbum: [],
+    currentAlbum: {photos: []},
     largePhotoIndex: 0,
   
      
