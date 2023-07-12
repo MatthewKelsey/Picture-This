@@ -13,8 +13,10 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: false,
-      secure: false,
+      secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
+      sameSite:"none",
+      domain:"picturingthis.netlify.app"
     },
   })
 );

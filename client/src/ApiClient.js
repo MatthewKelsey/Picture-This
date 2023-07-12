@@ -141,6 +141,7 @@ export const out = async () => {
 
 export const createAlbum = async (albumName) => {
   try {
+    console.log("inside create album api")
     const response = await fetch(root + "newAlbum", {
       method: "POST",
       headers: {
