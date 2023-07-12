@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for picture-server on 2023-07-06T15:31:13+01:00
+# fly.toml app configuration file generated for picture-server on 2023-07-12T10:09:44+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -10,6 +10,10 @@ kill_timeout = "5s"
 
 [experimental]
   auto_rollback = true
+
+[build]
+  builder = "paketobuildpacks/builder:base"
+  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
 
 [env]
   PRIMARY_REGION = "lhr"
@@ -37,7 +41,3 @@ kill_timeout = "5s"
     timeout = "2s"
     grace_period = "1s"
     restart_limit = 0
-
-[build]
-  builder = "paketobuildpacks/builder:base"
-  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
