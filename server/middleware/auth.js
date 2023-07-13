@@ -3,6 +3,7 @@ const User = require("../Models/userSchema");
 const authMiddleware = async (req, res, next) => {
   try {
     const { uid } = req.session;
+    console.log(uid)
     const user = await User.findOne({ _id: uid });
 
     if (!user) throw Error();
