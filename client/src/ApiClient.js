@@ -100,6 +100,7 @@ export const refreshUser = async () => {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
+      body: JSON.stringify({send: please})
     });
     const loggedUser = await response.json();
 
