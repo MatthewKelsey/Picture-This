@@ -10,7 +10,7 @@ app.use(
     name: "uid",
     secret: "superdupersecret",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
       httpOnly: false,
       secure: true,
