@@ -4,7 +4,7 @@ const cors = require("cors");
 const port = process.env.internal_port || 8080;
 const router = require("./router.js");
 const session = require("express-session");
-
+app.set('trust proxy', 1);
 app.use(
   session({
     name: "uid",
