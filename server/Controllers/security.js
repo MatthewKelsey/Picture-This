@@ -22,7 +22,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 exports.refreshUser = async (req, res) => {
-  console.log(req.session.uid);
+  console.log(req.email)
   try {
     const user = await User.findOne({ email: req.email }).populate({
       path: "uploadedAlbums sharedAlbums pendingInvite",
