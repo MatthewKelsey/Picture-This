@@ -70,14 +70,14 @@ function Photo({
    sx={{height:'28px'}}
   position="bottom"
   actionPosition="right"
-  actionIcon={<div> <DownloadIcon sx={{ color: '#fafafa' }} />{photo.uploader === user ? (
+  actionIcon={ photo.uploader === user ? (
     <DeleteForeverIcon
       sx={{ color: "white", marginRight: "10px" }}
       onClick={deleteHandle}
     />
   ) : (
     ""
-  )}  </div>}
+  ) }
   subtitle={ <>
   {like ? (<Badge>
     <FavoriteIcon sx={{ color: "white" }} onClick={likeHandle} /></Badge>
