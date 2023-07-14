@@ -3,7 +3,7 @@ import { likePhoto, deletePhoto } from "../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 import "./Photo.css";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
