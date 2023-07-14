@@ -96,6 +96,7 @@ export const login = async (user) => {
 };
 export const refreshUser = async (email) => {
   try {
+    console.log("api" , email)
     const response = await fetch(root + "refresh", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
