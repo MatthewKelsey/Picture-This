@@ -22,9 +22,9 @@ exports.registerUser = async (req, res) => {
   }
 };
 exports.refreshUser = async (req, res) => {
-  console.log(req.email)
+  console.log(req.body.email)
   try {
-    const user = await User.findOne({ email: req.email }).populate({
+    const user = await User.findOne({ email: req.body.email }).populate({
       path: "uploadedAlbums sharedAlbums pendingInvite",
       populate: { path: "photos" },
     });
