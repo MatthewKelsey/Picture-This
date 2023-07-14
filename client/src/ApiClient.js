@@ -94,13 +94,13 @@ export const login = async (user) => {
     console.log(error);
   }
 };
-export const refreshUser = async () => {
+export const refreshUser = async (email) => {
   try {
     const response = await fetch(root + "refresh", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({send: please})
+      body: JSON.stringify({email: email})
     });
     const loggedUser = await response.json();
 

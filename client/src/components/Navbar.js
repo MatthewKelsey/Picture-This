@@ -21,7 +21,7 @@ function Navbar(props) {
     navigate("/");
   };
   const handleHome = async () => {
-    const user = await refreshUser()
+    const user = await refreshUser(currentUser.email)
     dispatch(updateUser(user))
     navigate("/profile");
   };
