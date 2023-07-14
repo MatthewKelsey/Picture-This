@@ -18,7 +18,7 @@ router.post("/register", secure.registerUser);
 router.post("/login", secure.login);
 router.post("/logout",  secure.logout);
 // router.get("/users", secure.getUsers);
-router.get("/refresh", secure.refreshUser);
+router.put("/refresh", secure.refreshUser);
 // Album routes
 
 router.post("/newAlbum",  albums.createAlbum);

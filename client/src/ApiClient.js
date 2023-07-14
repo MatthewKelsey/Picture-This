@@ -97,7 +97,7 @@ export const login = async (user) => {
 export const refreshUser = async (email) => {
   try {
     const response = await fetch(root + "refresh", {
-      method: "GET",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({email: email})
