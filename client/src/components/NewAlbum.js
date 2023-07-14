@@ -26,7 +26,6 @@ function NewAlbum(props) {
 
     dispatch(updateUploadedAlbums(newAlbum));
     dispatch(updateCurrentAlbum(newAlbum));
-    console.log(newAlbum)
     dispatch(toggleAddAlbumPopup());
     dispatch(updateCurrentAlbum(newAlbum));
     navigate('/main')

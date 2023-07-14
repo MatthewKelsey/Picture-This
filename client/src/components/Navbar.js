@@ -21,14 +21,12 @@ function Navbar(props) {
     navigate("/");
   };
   const handleHome = async () => {
-    console.log(currentUser.email)
     const user = await refreshUser(currentUser.email)
     dispatch(updateUser(user))
     navigate("/profile");
   };
   const inviteHandle = () => {
     dispatch(toggleInvites())
-    console.log('e')
   };
 
   return (

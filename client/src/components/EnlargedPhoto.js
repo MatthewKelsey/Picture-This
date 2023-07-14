@@ -15,8 +15,6 @@ function EnlargedPhoto({ setLargePhotoActive, currentIndex, setCurrentIndex }) {
   const largePhoto = currentAlbum[currentIndex].imgAddress;
 
   function scrollForward() {
-    console.log(currentAlbum);
-    console.log(currentIndex);
     if (currentIndex === currentAlbum.length - 1) {
       setCurrentIndex(0);
     } else {

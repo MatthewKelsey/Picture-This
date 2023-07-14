@@ -35,7 +35,6 @@ export const uploadPhoto = async (content) => {
 };
 
 export const likePhoto = async (id) => {
-  console.log("inside like");
   try {
     const response = await fetch(root + "like", {
       method: "PUT",
@@ -87,8 +86,6 @@ export const login = async (user) => {
   
     });
     const loggedUser = await response.json();
-
-    console.log(loggedUser);
     return loggedUser;
   } catch (error) {
     console.log(error);
@@ -96,7 +93,6 @@ export const login = async (user) => {
 };
 export const refreshUser = async (email) => {
   try {
-    console.log("api" , email)
     const response = await fetch(root + "refresh", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -144,7 +140,6 @@ export const out = async () => {
 
 export const createAlbum = async (albumName) => {
   try {
-    console.log("inside create album api")
     const response = await fetch(root + "newAlbum", {
       method: "POST",
       headers: {
