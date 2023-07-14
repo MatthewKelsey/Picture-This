@@ -2,7 +2,7 @@
 const Router = require("express");
 const images = require("./Controllers/images");
 const secure = require("./Controllers/security");
-const authMiddleware = require("./middleware/auth");
+// const authMiddleware = require("./middleware/auth");
 const router = Router();
 const albums = require("./Controllers/albums");
 
