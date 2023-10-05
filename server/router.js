@@ -16,16 +16,16 @@ router.put("/like", authMiddleware, images.addLike);
 
 router.post("/register", secure.registerUser);
 router.post("/login", secure.login);
-router.post("/logout",  secure.logout);
-// router.get("/users", secure.getUsers);
+router.post("/logout", secure.logout);
 router.put("/refresh", authMiddleware, secure.refreshUser);
+router.delete("/user", authMiddleware ,secure.deleteUser);
 // Album routes
 
-router.post("/newAlbum",authMiddleware, albums.createAlbum);
-router.post("/album",authMiddleware, albums.getAlbum);
+router.post("/newAlbum", authMiddleware, albums.createAlbum);
+router.post("/album", authMiddleware, albums.getAlbum);
 router.post("/share-album", authMiddleware, albums.shareAlbum);
 router.post("/accept-invite", authMiddleware, albums.acceptAlbum);
 router.delete("/album", authMiddleware, albums.deleteAlbum);
 router.put("/album", authMiddleware, albums.removeSharedAlbum);
-router.put("/reject-invite", authMiddleware,  albums.rejectAlbum);
+router.put("/reject-invite", authMiddleware, albums.rejectAlbum);
 module.exports = router;

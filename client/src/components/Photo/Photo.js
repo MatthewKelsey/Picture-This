@@ -8,28 +8,24 @@ import "./Photo.css";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { removePhoto } from "../../Store/currentAlbumSlice";
-import {Badge} from "@mui/material";
+import { Badge } from "@mui/material";
 
 function Photo({
   photo,
   setLargePhotoActive,
   index,
- 
+
   setCurrentIndex,
 }) {
   const dispatch = useDispatch();
   const [like, setLike] = useState(true);
   const currentUser = useSelector((state) => state.currentUser);
-  // const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
+
   const user = currentUser._id;
   const likedBy = photo.liked;
-  // const owner = currentAlbum.owner;
-  // const uploader = photo.uploader;
-  // const uploaderName = photo.uploaderName;
 
   function deleteHandle() {
-    deletePhoto({id : photo._id , user: user});
-    // const albumUpdate = 
+    deletePhoto({ id: photo._id, user: user });
     dispatch(removePhoto(photo._id));
   }
 
@@ -61,44 +57,44 @@ function Photo({
       }}
     >
       <img
-        alt="hurro"
+        alt="pic"
         src={`${photo.imgAddress}?w=248&fit=crop&auto=format`}
         srcSet={`${photo.imgAddress}?w=248&fit=crop&auto=format&dpr=2 2x`}
         onClick={largeHandle}
       />
-   <ImageListItemBar
-   sx={{height:'28px'}}
-  position="bottom"
-  actionPosition="right"
-  actionIcon={ photo.uploader === user ? (
-    <DeleteForeverIcon
-      sx={{ color: "white", marginRight: "10px" }}
-      onClick={deleteHandle}
-    />
-  ) : (
-    ""
-  ) }
-  subtitle={ <>
-  {like ? (<Badge>
-    <FavoriteIcon sx={{ color: "white" }} onClick={likeHandle} /></Badge>
-  ) : (
-    <Badge>
-    <FavoriteBorderIcon sx={{ color: "white" }} onClick={likeHandle} /></Badge>
-  )}
-  {likedBy.length ? likedBy.length : ""}</> 
-}
-/>
-      <div className="photo-icons">
-        {/* <div className="likes">
-          {like ? (
-            <FavoriteIcon sx={{ color: "red" }} onClick={likeHandle} />
+      <ImageListItemBar
+        sx={{ height: "28px" }}
+        position="bottom"
+        actionPosition="right"
+        actionIcon={
+          photo.uploader === user ? (
+            <DeleteForeverIcon
+              sx={{ color: "white", marginRight: "10px" }}
+              onClick={deleteHandle}
+            />
           ) : (
-            <FavoriteBorderIcon sx={{ color: "red" }} onClick={likeHandle} />
-          )}
-          {likedBy.length ? likedBy.length : ""}
-        </div> */}
-         
-      </div>
+            ""
+          )
+        }
+        subtitle={
+          <>
+            {like ? (
+              <Badge>
+                <FavoriteIcon sx={{ color: "white" }} onClick={likeHandle} />
+              </Badge>
+            ) : (
+              <Badge>
+                <FavoriteBorderIcon
+                  sx={{ color: "white" }}
+                  onClick={likeHandle}
+                />
+              </Badge>
+            )}
+            {likedBy.length ? likedBy.length : ""}
+          </>
+        }
+      />
+      <div className="photo-icons"></div>
       <div className="title-bar">
         <span>{photo.title}</span>
       </div>

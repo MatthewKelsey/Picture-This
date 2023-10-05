@@ -22,9 +22,9 @@ exports.registerUser = async (req, res) => {
   }
 };
 exports.refreshUser = async (req, res) => {
-  console.log(req.body.email)
+  
   try {
-    const user = await User.findOne({ email: req.body.email }).populate({
+    const user = await User.findOne({ _id: req.session.uid }).populate({
       path: "uploadedAlbums sharedAlbums pendingInvite",
       populate: { path: "photos" },
     });
@@ -36,7 +36,6 @@ exports.refreshUser = async (req, res) => {
   }
 };
 exports.login = async (req, res) => {
-  console.log('hello')
   try {
     const email = req.body.email;
     const user = await User.findOne({ email: email }).populate({
@@ -77,6 +76,17 @@ exports.getUsers = async (req, res) => {
     res.send(allUsers);
     res.status(200);
   } catch (error) {
-    console.log("hello ", error);
+    console.log( error);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({email: req.body.email});
+
+    res.send(deletedUser);
+    res.status(200);
+  } catch (error) {
+    console.log(error);
   }
 };

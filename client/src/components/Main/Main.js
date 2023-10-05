@@ -58,7 +58,7 @@ function Main(props) {
           setCurrentIndex={setCurrentIndex}
         />
       )}
-      <div onClick={setShowUpload} className="add-photo">
+      <div onClick={setShowUpload} className="add-photo" id="add">
         +
       </div>
       <div className="share" onClick={share}>

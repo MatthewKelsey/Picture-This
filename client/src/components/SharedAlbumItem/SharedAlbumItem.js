@@ -7,15 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateSharedAlbum } from "../../Store/userSlice";
 import { updateCurrentAlbum } from "../../Store/currentAlbumSlice";
 
-
-function SharedAlbumItem({ album}) {
+function SharedAlbumItem({ album }) {
   const sharedAlbums = useSelector((state) => state.currentUser.sharedAlbums);
-  const user = useSelector((state)=> state.currentUser._id)
+  const user = useSelector((state) => state.currentUser._id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const removeAlbum = async () => {
-   await removeSharedAlbum({albumId :album._id, user: user});
+    await removeSharedAlbum({ albumId: album._id, user: user });
     const filteredAlbumList = sharedAlbums.filter((albumItem) => {
       return albumItem._id !== album._id;
     });
@@ -23,24 +22,23 @@ function SharedAlbumItem({ album}) {
   };
 
   const openAlbum = async () => {
-    dispatch(updateCurrentAlbum(album))
+    dispatch(updateCurrentAlbum(album));
     navigate("/main-share");
   };
 
   return (
     <ImageListItem
-     key={album._id}
+      key={album._id}
       sx={{
         gap: 10,
         "&::-webkit-scrollbar": {
           display: "none",
         },
         margin: "5px",
-        minWidth: { 
-          xs: '250px !important',
-          sm: '300px !important',
-          md: '350px !important',
-          
+        minWidth: {
+          xs: "250px !important",
+          sm: "300px !important",
+          md: "350px !important",
         },
         maxWidth: "20%",
         cursor: "pointer",
@@ -50,7 +48,6 @@ function SharedAlbumItem({ album}) {
           minWidth: "250px",
           maxWidth: "250px",
         },
-      
       }}
       onClick={openAlbum}
     >
