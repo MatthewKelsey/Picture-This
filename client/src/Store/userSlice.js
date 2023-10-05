@@ -17,7 +17,6 @@ export const currentUser = createSlice({
     },
 
     updatePending: (state, action) => {
-      console.log("reached pending", action.payload);
       state.pendingInvite = action.payload;
     },
     addSharedAlbum: (state, action) => {
@@ -44,6 +43,7 @@ export const currentUser = createSlice({
       state.pendingInvite = pendingInvite;
       state.uploadedAlbums = uploadedAlbums;
       state._id = _id
+      console.log(state.email)
     },
   },
 });

@@ -1,11 +1,11 @@
 import React from "react";
-import ShareAlbum from "./ShareAlbum";
+import ShareAlbum from "../ShareAlbum/ShareAlbum";
 import { useState,} from "react";
-import MainAlbum from "./MainAlbum";
-import Uploader from "./Uploader";
-import EnlargedPhoto from "./EnlargedPhoto";
+import MainAlbum from "../MainAlbum/MainAlbum";
+import Uploader from "../Uploader/Uploader";
+import EnlargedPhoto from "../EnlargedPhoto/EnlargedPhoto";
 import "./Main.css";
-import Invites from "./Invites";
+import Invites from "../InviteList/Invites";
 import {  useSelector } from "react-redux";
 import ShareIcon from "@mui/icons-material/Share";
 function Main(props) {

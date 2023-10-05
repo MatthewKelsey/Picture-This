@@ -13,7 +13,6 @@ export const currentAlbumSlice = createSlice({
       state.currentAlbum.photos.push(action.payload);
     },
     removePhoto: (state, action) => {
-      console.log(action.payload);
       state.currentAlbum.photos = state.currentAlbum.photos.filter((photo) => {
         return photo._id !== action.payload;
       });

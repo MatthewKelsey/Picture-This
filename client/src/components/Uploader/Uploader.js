@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { uploadPhoto } from "../ApiClient";
+import { uploadPhoto } from "../../ApiClient";
 import "./Uploader.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addPhoto } from "../currentAlbumSlice";
+import { addPhoto } from "../../Store/currentAlbumSlice";
 function Uploader(props) {
   const currentAlbum = useSelector((state)=> state.currentAlbum.currentAlbum)
-  // const currentUser = useSelector((state)=> state.currentUser.initialState)
+  const currentUser = useSelector((state)=> state.currentUser._id)
   const dispatch = useDispatch()
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState([]);
+
 
   const handleFileInputChange = (e) => {
     const files = e.target.files;
@@ -36,6 +37,7 @@ function Uploader(props) {
         album: currentAlbum._id,
         data: previewSource[i],
         admin: currentAlbum.owner,
+        uploader: currentUser
       });
       dispatch(addPhoto(newPhoto))
       setPreviewSource((prevState) =>
@@ -49,6 +51,7 @@ function Uploader(props) {
   const close = () => {
     props.setShowUpload(false);
   };
+
 
   return (
     <div className="uploader">

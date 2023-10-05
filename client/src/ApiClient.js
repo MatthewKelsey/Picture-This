@@ -1,5 +1,5 @@
-// const root = "http://localhost:8080/"
-const root = "https://picture-server.fly.dev/";
+const root = "http://localhost:8080/"
+// const root = "https://picture-server.fly.dev/";
 
 export const getAllPhotos = async () => {
   try {
@@ -55,7 +55,8 @@ export const likePhoto = async (id) => {
   }
 };
 
-export const deletePhoto = async (id) => {
+export const deletePhoto = async (body) => {
+  console.log(body)
   try {
     const response = await fetch(root + "delete", {
       method: "DELETE",
@@ -66,7 +67,7 @@ export const deletePhoto = async (id) => {
           "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
         "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
       },
-      body: JSON.stringify({ id: id }),
+      body: JSON.stringify(body),
       credentials: "include",
       mode: "cors",
     });
@@ -184,7 +185,7 @@ export const getAlbum = async (id) => {
   }
 };
 
-export const deleteAlbum = async (albumId) => {
+export const deleteAlbum = async (body) => {
   try {
     const response = await fetch(root + "album", {
       method: "DELETE",
@@ -195,7 +196,7 @@ export const deleteAlbum = async (albumId) => {
           "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
         "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
       },
-      body: JSON.stringify({ albumId: albumId }),
+      body: JSON.stringify(body),
       credentials: "include",
       mode: "cors",
     });
@@ -249,7 +250,9 @@ export const acceptInvite = async (albumId) => {
   }
 };
 
-export const removeSharedAlbum = async (albumId) => {
+export const removeSharedAlbum = async (body) => {
+  console.log('in remove')
+  console.log(body)
   try {
     const response = await fetch(root + "album", {
       method: "Put",
@@ -260,7 +263,7 @@ export const removeSharedAlbum = async (albumId) => {
           "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
         "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
       },
-      body: JSON.stringify({ albumId: albumId }),
+      body: JSON.stringify(body),
       credentials: "include",
       mode: "cors",
     });

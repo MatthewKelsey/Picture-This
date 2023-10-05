@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { likePhoto, deletePhoto } from "../ApiClient";
+import { likePhoto, deletePhoto } from "../../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -7,7 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Photo.css";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { removePhoto } from "../currentAlbumSlice";
+import { removePhoto } from "../../Store/currentAlbumSlice";
 import {Badge} from "@mui/material";
 
 function Photo({
@@ -28,7 +28,7 @@ function Photo({
   // const uploaderName = photo.uploaderName;
 
   function deleteHandle() {
-    deletePhoto(photo._id);
+    deletePhoto({id : photo._id , user: user});
     // const albumUpdate = 
     dispatch(removePhoto(photo._id));
   }

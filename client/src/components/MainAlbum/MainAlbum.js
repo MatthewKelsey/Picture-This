@@ -1,5 +1,5 @@
 import React from "react";
-import Photo from "./Photo";
+import Photo from "../Photo/Photo";
 import "./MainAlbum.css";
 import { ImageList } from "@mui/material";
 import { useSelector } from "react-redux";

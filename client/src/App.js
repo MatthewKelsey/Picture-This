@@ -1,13 +1,15 @@
-import Main from "./components/Main";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
+import Main from "./components/Main/Main";
+// import Login from "./components/Login";
+import Profile from "./components/Profile/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from "./components/Register";
-import NewAlbum from "./components/NewAlbum";
+// import Register from "./components/Register";
+import NewAlbum from "./components/NewAlbum/NewAlbum";
 import { useState } from "react";
-import Invites from "./components/Invites";
-import MainShare from "./components/MainShare";
-import Navbar from "./components/Navbar";
+import Invites from "./components/InviteList/Invites";
+import MainShare from "./components/MainShare/MainShare";
+import Navbar from "./components/Navbar/Navbar";
+import SignIn from "./components/SignIn/SignIn";
+import SignUp from "./components/SignUp/SignUp";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -32,11 +34,11 @@ function App() {
           />
           <Route
             path="/login"
-            element={<Login setCurrentUser={setCurrentUser} />}
+            element={<SignIn setCurrentUser={setCurrentUser} />}
           />
           <Route
             path="/"
-            element={<Register setCurrentUser={setCurrentUser} />}
+            element={<SignUp setCurrentUser={setCurrentUser} />}
           />
           <Route path="/new" element={<NewAlbum />} />
           <Route

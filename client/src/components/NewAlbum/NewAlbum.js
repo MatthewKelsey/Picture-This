@@ -1,17 +1,20 @@
 import React from "react";
 import { useState } from "react";
-import { createAlbum } from "../ApiClient";
-import { useDispatch } from "react-redux";
-import { updateUploadedAlbums } from "../userSlice";
+import { createAlbum } from "../../ApiClient";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUploadedAlbums } from "../../Store/userSlice";
 import "./NewAlbum.css";
-import { toggleAddAlbumPopup } from "../notificationSlice";
-import { updateCurrentAlbum } from "../currentAlbumSlice";
+import { toggleAddAlbumPopup } from "../../Store/notificationSlice";
+import { updateCurrentAlbum } from "../../Store/currentAlbumSlice";
 import { useNavigate } from "react-router-dom";
 function NewAlbum(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state)=> state.currentUser._id)
+
   const initialState = {
     albumName: "",
+    uploader: currentUser,
     photos : []
   };
   const [state, setState] = useState(initialState);
@@ -19,8 +22,7 @@ function NewAlbum(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { albumName } = state;
-    const album = { albumName };
+    const album = state;
 
     let newAlbum = await createAlbum(album);
 

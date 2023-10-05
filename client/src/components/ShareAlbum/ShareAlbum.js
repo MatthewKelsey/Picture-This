@@ -1,14 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { shareAlbumRequest } from "../ApiClient";
+import { shareAlbumRequest } from "../../ApiClient";
 // import { useDispatch } from "react-redux";
 import './ShareAlbum.css';
+import { useSelector } from "react-redux";
 function ShareAlbum(props) {
 
 
   const initialState = {
     email: "",
   };
+  const currentUser = useSelector((state)=> state.currentUser._id)
   const [state, setState] = useState(initialState);
 
   const handleSubmit = async (e) => {
@@ -19,6 +21,7 @@ function ShareAlbum(props) {
      await shareAlbumRequest({
       email: email,
       albumId: props.currentAlbum._id,
+      user: currentUser
     });
     props.setSharePopup(false);
   };

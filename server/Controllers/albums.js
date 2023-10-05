@@ -14,18 +14,20 @@ exports.getAlbum = async (req, res) => {
 };
 
 exports.createAlbum = async (req, res) => {
+  console.log("request", req.body);
   try {
     const newAlbum = await Album.create({
       albumName: req.body.albumName,
-      owner: req.session.uid,
+      owner: req.body.uploader,
     });
-    const user = await User.findOne({ _id: req.session.uid });
+    const user = await User.findOne({ _id: req.body.uploader });
+    console.log(user);
     let userAlbums = user.uploadedAlbums;
     userAlbums.push(newAlbum);
     user.uploadedAlbums = userAlbums;
 
     user.save();
-  
+
     res.status(201);
     res.send(newAlbum);
   } catch (error) {
@@ -33,36 +35,30 @@ exports.createAlbum = async (req, res) => {
     res.status(500);
   }
 };
-
 exports.deleteAlbum = async (req, res) => {
-
+  console.log(req.body);
   try {
-    const user = await User.findOne({ _id: req.session.uid });
-
+    const user = await User.findOne({ _id: req.body.user });
     const deletedAlbum = await Album.findOneAndDelete({
       _id: req.body.albumId,
     });
 
-    let album = req.body.albumId;
-    let userAlbums = user.uploadedAlbums;
-    const index = userAlbums.indexOf(album);
-   
-    userAlbums.splice(index, 1);
-    user.uploadedAlbums = userAlbums;
-    user.save();
+    const albumIndex = user.uploadedAlbums.indexOf(req.body.albumId);
+    if (albumIndex !== -1) {
+      user.uploadedAlbums.splice(albumIndex, 1);
+      await user.save();
+    }
 
-    res.status(204);
-    res.send(deletedAlbum);
+    res.status(204).send();
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).send("An error occurred while deleting the album.");
   }
 };
-
 exports.shareAlbum = async (req, res) => {
-  
   try {
     const invitedUser = await User.findOne({ email: req.body.email });
-   
+
     const invitedAlbum = req.body.albumId;
     let pending = invitedUser.pendingInvite;
     pending.push(invitedAlbum);
@@ -76,9 +72,8 @@ exports.shareAlbum = async (req, res) => {
 };
 
 exports.rejectAlbum = async (req, res) => {
-
   try {
-    const user = await User.findOne({ _id: req.session.uid });
+    const user = await User.findOne({ _id: req.body.user });
     const album = req.body._id;
     pendingInvites = user.pendingInvite;
     const index = pendingInvites.indexOf(album);
@@ -96,9 +91,8 @@ exports.rejectAlbum = async (req, res) => {
 };
 
 exports.acceptAlbum = async (req, res) => {
- 
   try {
-    const user = await User.findOne({ _id: req.session.uid });
+    const user = await User.findOne({ _id: req.body.user });
     const pending = req.body.albumId;
     const newAlbum = await Album.findOne({ _id: pending }).populate("photos");
 
@@ -109,7 +103,7 @@ exports.acceptAlbum = async (req, res) => {
     let pendingList = user.pendingInvite;
     const index = pendingList.indexOf(pending);
     pendingList.splice(index, [index + 1]);
-   
+
     user.pendingInvite = pendingList;
     user.save();
 
@@ -121,17 +115,16 @@ exports.acceptAlbum = async (req, res) => {
 };
 
 exports.removeSharedAlbum = async (req, res) => {
- 
   try {
     const album = req.body.albumId;
-   
-    const user = await User.findOne({ _id: req.session.uid });
+
+    const user = await User.findOne({ _id: req.body.user });
     const sharedAlbums = user.sharedAlbums;
-    
+
     let index = sharedAlbums.indexOf(album);
 
     sharedAlbums.splice(index, 1);
-  
+
     user.sharedAlbums = sharedAlbums;
     user.save();
     res.status(204);

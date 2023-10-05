@@ -1,12 +1,12 @@
 import React from "react";
-import NewAlbum from "./NewAlbum";
-import AlbumItem from "./AlbumItem";
-import Invites from "./Invites";
-import SharedAlbumItem from "./SharedAlbumItem";
+import NewAlbum from "../NewAlbum/NewAlbum";
+import AlbumItem from ".././AlbumItem/AlbumItem";
+import Invites from "../InviteList/Invites";
+import SharedAlbumItem from "../SharedAlbumItem/SharedAlbumItem";
 import { ImageList } from "@mui/material";
 import "./Profile.css";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleAddAlbumPopup } from "../notificationSlice";
+import { toggleAddAlbumPopup } from "../../Store/notificationSlice";
 
 
 function Profile(props) {

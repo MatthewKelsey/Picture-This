@@ -1,15 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { out } from "../ApiClient";
+import { out } from "../../ApiClient";
 import "./Navbar.css";
 import { useDispatch , useSelector} from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import  Badge  from "@mui/material/Badge";
 import MailIcon from '@mui/icons-material/Mail';
-import { toggleInvites } from "../notificationSlice";
-import { refreshUser } from "../ApiClient";
-import { updateUser } from "../userSlice";
+import { toggleInvites } from "../../Store/notificationSlice";
+import { refreshUser } from "../../ApiClient";
+import { updateUser } from "../../Store/userSlice";
 
 
 function Navbar(props) {

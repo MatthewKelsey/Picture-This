@@ -1,25 +1,27 @@
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteAlbum } from "../ApiClient";
+import { deleteAlbum } from "../../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import { updateUploadedAlbums } from "../userSlice";
+import { updateUploadedAlbums } from "../../Store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCurrentAlbum } from "../currentAlbumSlice";
+import { updateCurrentAlbum } from "../../Store/currentAlbumSlice";
 
 function AlbumItem({ album }) {
   const userAlbums = useSelector((state) => state.currentUser.uploadedAlbums);
+  const currentUser = useSelector((state)=> state.currentUser._id)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const removeAlbum = useCallback(async () => {
-    await deleteAlbum(album._id);
+    await deleteAlbum({albumId : album._id, user: currentUser});
     const newAlbumCollection = userAlbums.filter(
       (element) => element._id !== album._id
     );
     dispatch(updateUploadedAlbums(newAlbumCollection));
-  }, [album._id, userAlbums, dispatch]);
+  }, [album._id, userAlbums, dispatch, currentUser]);
 
   const openAlbum = useCallback(async () => {
     dispatch(updateCurrentAlbum(album));

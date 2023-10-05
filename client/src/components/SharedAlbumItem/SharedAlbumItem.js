@@ -1,20 +1,21 @@
 import React from "react";
-import { removeSharedAlbum } from "../ApiClient";
+import { removeSharedAlbum } from "../../ApiClient";
 import { useNavigate } from "react-router-dom";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
-import { updateSharedAlbum } from "../userSlice";
-import { updateCurrentAlbum } from "../currentAlbumSlice";
+import { updateSharedAlbum } from "../../Store/userSlice";
+import { updateCurrentAlbum } from "../../Store/currentAlbumSlice";
 
 
 function SharedAlbumItem({ album}) {
   const sharedAlbums = useSelector((state) => state.currentUser.sharedAlbums);
+  const user = useSelector((state)=> state.currentUser._id)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const removeAlbum = async () => {
-   await removeSharedAlbum(album._id);
+   await removeSharedAlbum({albumId :album._id, user: user});
     const filteredAlbumList = sharedAlbums.filter((albumItem) => {
       return albumItem._id !== album._id;
     });

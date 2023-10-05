@@ -1,7 +1,7 @@
 import React from "react";
-import { acceptInvite, rejectAlbum } from "../ApiClient";
+import { acceptInvite, rejectAlbum } from "../../ApiClient";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePending, addSharedAlbum } from "../userSlice";
+import { updatePending, addSharedAlbum } from "../../Store/userSlice";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import "./InviteItem.css";

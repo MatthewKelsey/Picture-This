@@ -1,7 +1,7 @@
 import React from "react";
-import InviteItem from "./InviteItem";
+import InviteItem from "../InviteItem/InviteItem";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleInvites } from "../notificationSlice";
+import { toggleInvites } from "../../Store/notificationSlice";
 import "./Invites.css";
 function Invites(props) {
   const invites = useSelector((state) => state.currentUser.pendingInvite);

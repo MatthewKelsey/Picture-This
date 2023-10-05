@@ -7,16 +7,16 @@ const session = require("express-session");
 app.set('trust proxy', 1);
 app.use(
   session({
-    name: "uid",
+    name: "sid",
     secret: "superdupersecret",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
       httpOnly: false,
-      secure: true,
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24 * 365,
-      sameSite:"none",
-      domain:"picture-server.fly.dev"
+      sameSite:"lax",
+      // domain:"picture-server.fly.dev"
     },
   })
 );

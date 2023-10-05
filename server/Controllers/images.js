@@ -24,7 +24,7 @@ exports.uploadPhoto = async (req, res) => {
       ...req.body,
       imgAddress: result.secure_url,
       id: result.public_id,
-      uploader: req.session.uid,
+      uploader: req.body.uploader,
     });
     photos = album.photos;
     photos.push(newImg);
