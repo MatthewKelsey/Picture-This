@@ -36,6 +36,19 @@ cd /client
 npm start
 ```
 
+## Testing
+
+Unit tests can be run from inside the client folder with the following command.
+
+```
+npm test
+```
+
+End to end testing can be run from inside the client folder with the following command.
+```
+npx cypress run
+```
+
 ## Tech Stack
 * [React JS](https://reactjs.org) - Front end library for building user interfaces
 * [Cloudinary](https://cloudinary.com) - Image and Video APIs
@@ -45,5 +58,4 @@ npm start
 
 ## Author
 * Matthew Kelsey - [GitHub](https://github.com/MatthewKelsey) - [LinkedIn](https://www.linkedin.com/)
-
 
