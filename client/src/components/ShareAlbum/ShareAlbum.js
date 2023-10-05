@@ -2,15 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { shareAlbumRequest } from "../../ApiClient";
 // import { useDispatch } from "react-redux";
-import './ShareAlbum.css';
+import "./ShareAlbum.css";
 import { useSelector } from "react-redux";
 function ShareAlbum(props) {
-
-
   const initialState = {
     email: "",
   };
-  const currentUser = useSelector((state)=> state.currentUser._id)
+  const currentUser = useSelector((state) => state.currentUser._id);
   const [state, setState] = useState(initialState);
 
   const handleSubmit = async (e) => {
@@ -18,10 +16,10 @@ function ShareAlbum(props) {
 
     const { email } = state;
     // const res =
-     await shareAlbumRequest({
+    await shareAlbumRequest({
       email: email,
       albumId: props.currentAlbum._id,
-      user: currentUser
+      user: currentUser,
     });
     props.setSharePopup(false);
   };
@@ -40,7 +38,7 @@ function ShareAlbum(props) {
   };
 
   return (
-    <section className="share-album">
+    <section className="new-album-form">
       <br></br>
 
       <br></br>
@@ -48,16 +46,19 @@ function ShareAlbum(props) {
         X
       </div>
       <h2>Share Album </h2>
-      <form className="share-album-form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Email"
           name="email"
           value={state.email}
           onChange={handleChange}
+          label="Email Address"
         />
         <br></br>
-        <button className="form-submit" type="submit" disabled={validateForm()}> Submit </button>
+        <button className="form-submit" type="submit" disabled={validateForm()}>
+          &nbsp;Submit&nbsp;{" "}
+        </button>
       </form>
     </section>
   );

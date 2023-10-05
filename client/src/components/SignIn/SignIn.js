@@ -36,7 +36,6 @@ function Copyright(props) {
   );
 }
 
-
 const defaultTheme = createTheme();
 
 const initialState = {
@@ -46,7 +45,7 @@ const initialState = {
 
 function SignIn() {
   let navigate = useNavigate();
- 
+
   const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
 

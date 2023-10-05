@@ -4,12 +4,11 @@ import "./Uploader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addPhoto } from "../../Store/currentAlbumSlice";
 function Uploader(props) {
-  const currentAlbum = useSelector((state)=> state.currentAlbum.currentAlbum)
-  const currentUser = useSelector((state)=> state.currentUser._id)
-  const dispatch = useDispatch()
+  const currentAlbum = useSelector((state) => state.currentAlbum.currentAlbum);
+  const currentUser = useSelector((state) => state.currentUser._id);
+  const dispatch = useDispatch();
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState([]);
-
 
   const handleFileInputChange = (e) => {
     const files = e.target.files;
@@ -33,17 +32,16 @@ function Uploader(props) {
   const handleSubmitFile = async (e) => {
     e.preventDefault();
     for (let i = 0; i < previewSource.length; i++) {
-     const newPhoto = await uploadPhoto({
+      const newPhoto = await uploadPhoto({
         album: currentAlbum._id,
         data: previewSource[i],
         admin: currentAlbum.owner,
-        uploader: currentUser
+        uploader: currentUser,
       });
-      dispatch(addPhoto(newPhoto))
+      dispatch(addPhoto(newPhoto));
       setPreviewSource((prevState) =>
         prevState.filter((_, index) => index !== i)
       );
-      // props.setPhotos([...props.photos , newPhoto ])
     }
     props.setShowUpload(false);
   };
@@ -52,14 +50,13 @@ function Uploader(props) {
     props.setShowUpload(false);
   };
 
-
   return (
     <div className="uploader">
       <div onClick={close} className="top-right">
         X
       </div>
       <br></br>
-      
+
       {previewSource.length > 0 && (
         <div className="uploader-image">
           {previewSource.map((source, index) => (

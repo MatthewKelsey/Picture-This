@@ -10,12 +10,12 @@ import { useNavigate } from "react-router-dom";
 function NewAlbum(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state)=> state.currentUser._id)
+  const currentUser = useSelector((state) => state.currentUser._id);
 
   const initialState = {
     albumName: "",
     uploader: currentUser,
-    photos : []
+    photos: [],
   };
   const [state, setState] = useState(initialState);
 
@@ -30,7 +30,7 @@ function NewAlbum(props) {
     dispatch(updateCurrentAlbum(newAlbum));
     dispatch(toggleAddAlbumPopup());
     dispatch(updateCurrentAlbum(newAlbum));
-    navigate('/main')
+    navigate("/main");
   };
   const close = () => {
     dispatch(toggleAddAlbumPopup());
@@ -48,7 +48,7 @@ function NewAlbum(props) {
   };
 
   return (
-    <section className="new-album-form">
+    <section className="new-album-form" data-testid="new-album-form">
       <br></br>
       <div onClick={close} className="top-right">
         X

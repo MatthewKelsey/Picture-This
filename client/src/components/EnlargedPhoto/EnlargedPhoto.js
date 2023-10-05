@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import "./EnlargedPhoto.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
-
 import { useSelector } from "react-redux";
 function EnlargedPhoto({ setLargePhotoActive, currentIndex, setCurrentIndex }) {
   const close = () => setLargePhotoActive(false);
@@ -56,14 +53,7 @@ function EnlargedPhoto({ setLargePhotoActive, currentIndex, setCurrentIndex }) {
       <div className="close" onClick={close}>
         <p>X</p>
       </div>
-      <DeleteForeverIcon
-        sx={{
-          color: "white",
-          position: "absolute",
-          right: "2%",
-          bottom: "2%",
-        }}
-      ></DeleteForeverIcon>
+    
     </div>
   );
 }

@@ -59,4 +59,3 @@ npx cypress run
 ## Author
 * Matthew Kelsey - [GitHub](https://github.com/MatthewKelsey) - [LinkedIn](https://www.linkedin.com/)
 
-

@@ -92,7 +92,7 @@ exports.rejectAlbum = async (req, res) => {
 
 exports.acceptAlbum = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.body.user });
+    const user = await User.findOne({ _id: req.session.uid });
     const pending = req.body.albumId;
     const newAlbum = await Album.findOne({ _id: pending }).populate("photos");
 

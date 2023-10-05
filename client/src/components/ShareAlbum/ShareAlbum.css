@@ -24,9 +24,6 @@
   .share-album-form button {
     background-color: aliceblue;
     color: black;
-    padding: 10px 20px; /* Add padding to adjust button size */
-    border: none; /* Remove default button border */
-    cursor: pointer;
   }
   
   

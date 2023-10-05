@@ -295,3 +295,25 @@ export const rejectAlbum = async (albumId) => {
     console.log(error);
   }
 };
+
+export const deleteUser = async (body) => {
+  try {
+    const response = await fetch(root + "user", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+        "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+      },
+      body: JSON.stringify(body),
+      credentials: "include",
+      mode: "cors",
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
