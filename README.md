@@ -36,6 +36,14 @@ cd /client
 npm start
 ```
 
+## Testing
+
+Unit tests can be run from inside the client folder with the following command.
+
+```
+npm test
+```
+
 ## Tech Stack
 * [React JS](https://reactjs.org) - Front end library for building user interfaces
 * [Cloudinary](https://cloudinary.com) - Image and Video APIs
