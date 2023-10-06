@@ -22,7 +22,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 exports.refreshUser = async (req, res) => {
-  
   try {
     const user = await User.findOne({ _id: req.session.uid }).populate({
       path: "uploadedAlbums sharedAlbums pendingInvite",
@@ -37,23 +36,42 @@ exports.refreshUser = async (req, res) => {
 };
 exports.login = async (req, res) => {
   try {
-    const email = req.body.email;
-    const user = await User.findOne({ email: email }).populate({
+    const { email, password } = req.body;
+    const user = await User.findOne({ email }).populate({
       path: "uploadedAlbums sharedAlbums pendingInvite",
       populate: { path: "photos" },
     });
-    if (user) {
-      const valid = await bcrypt.compare(req.body.password, user.password);
-      if (valid) {
-        req.session.uid = user._id;
-        res.status(200).send(user);
-      }
+
+    if (!user) {
+      return res
+        .status(401)
+        .send({
+          error: "Invalid email",
+          message: "Email and/or password incorrect",
+        });
     }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
+      return res
+        .status(401)
+        .send({
+          error: "Incorrect password",
+          message: "Email and/or password incorrect",
+        });
+    }
+
+    req.session.uid = user._id;
+    res.status(200).send(user);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res
-      .status(401)
-      .send({ error: error, message: "Email and/or password incorrect" });
+      .status(500)
+      .send({
+        error: "Internal server error",
+        message: "An error occurred during login",
+      });
   }
 };
 
@@ -76,13 +94,13 @@ exports.getUsers = async (req, res) => {
     res.send(allUsers);
     res.status(200);
   } catch (error) {
-    console.log( error);
+    console.log(error);
   }
 };
 
 exports.deleteUser = async (req, res) => {
   try {
-    const deletedUser = await User.findOneAndDelete({email: req.body.email});
+    const deletedUser = await User.findOneAndDelete({ email: req.body.email });
 
     res.send(deletedUser);
     res.status(200);
