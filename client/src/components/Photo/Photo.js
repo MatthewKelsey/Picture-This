@@ -3,7 +3,6 @@ import { likePhoto, deletePhoto } from "../../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-// import DownloadIcon from '@mui/icons-material/Download';
 import "./Photo.css";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
@@ -49,7 +48,6 @@ function Photo({
     <ImageListItem
       sx={{
         position: "relative",
-        // boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
         padding: "2px",
         borderRadius: "2px",
         display: "flex",

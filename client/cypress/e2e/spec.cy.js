@@ -40,3 +40,4 @@ describe("Upload Album", () => {
     cy.deleteUserByEmail(testEmail);
   });
 });
+
