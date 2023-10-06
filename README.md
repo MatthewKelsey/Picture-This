@@ -9,6 +9,9 @@ Picture This is an app for sharing photos with friends and acquaintances through
 * [Installation](https://www.mongodb.com/docs/manual/installation/)
 * [Create a MongoDB account](https://www.mongodb.com/atlas/database)
 
+2. You will need a cloudinary account for storing images.
+* [Create a Cloudinary account](https://cloudinary.com/users/register_free)
+
 ## Screenshots
 
 <p align="center">
@@ -28,7 +31,7 @@ cd Picture-This
 ```bash
 npm install
 ```
-3. Create a .env file inside server folder and update MONGODB_CREDENTIALS, JWT_SECRET and PORT. Follow the .env.sample as a guide. Please see the README file inside the server folder of this reopository for more information on where to find your MONGODB_CREDENTIALS.
+3. Create a .env file inside server folder and update MONGODB_CREDENTIALS and Cloudinary credentials. Follow the .env.sample as a guide. 
 ```
 cd server
 touch .env
