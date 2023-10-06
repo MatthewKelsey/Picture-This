@@ -2,6 +2,13 @@
 # Picture This
 Picture This is an app for sharing photos with friends and acquaintances through the use of private and shared photo albums.
 
+## Prerequisites
+
+1. In order to run Picture- This you will need to have access to an instance of MongoDB. You can either install MongoDB locally or create a free online account with MongoDB Atlas. Windows users are strongly recommended to use MongoDB Atlas for ease of use. 
+
+* [Installation](https://www.mongodb.com/docs/manual/installation/)
+* [Create a MongoDB account](https://www.mongodb.com/atlas/database)
+
 ## Screenshots
 
 <p align="center">
@@ -21,15 +28,20 @@ cd Picture-This
 ```bash
 npm install
 ```
+3. Create a .env file inside server folder and update MONGODB_CREDENTIALS, JWT_SECRET and PORT. Follow the .env.sample as a guide. Please see the README file inside the server folder of this reopository for more information on where to find your MONGODB_CREDENTIALS.
+```
+cd server
+touch .env
+```
 
-3. Start development server
+4. Start development server
 
 ```bash
 cd /server
 npx nodemon 
 ```
 
-4. Start the front end app
+5. Start the front end app
 
 ```bash
 cd /client
