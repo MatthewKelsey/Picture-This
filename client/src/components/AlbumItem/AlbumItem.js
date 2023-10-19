@@ -1,26 +1,39 @@
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteAlbum } from "../../ApiClient";
+import { deleteAlbum, removeSharedAlbum } from "../../ApiClient";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import { updateUploadedAlbums } from "../../Store/userSlice";
+import { updateUploadedAlbums ,updateSharedAlbum} from "../../Store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCurrentAlbum } from "../../Store/currentAlbumSlice";
+import {
+  updateCurrentAlbum,
+
+} from "../../Store/currentAlbumSlice";
 
 function AlbumItem({ album }) {
   const userAlbums = useSelector((state) => state.currentUser.uploadedAlbums);
-  const currentUser = useSelector((state)=> state.currentUser._id)
-
+  const currentUser = useSelector((state) => state.currentUser._id);
+  const sharedAlbums = useSelector((state) => state.currentUser.sharedAlbums);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const removeAlbum = useCallback(async () => {
-    await deleteAlbum({albumId : album._id, user: currentUser});
-    const newAlbumCollection = userAlbums.filter(
-      (element) => element._id !== album._id
-    );
-    dispatch(updateUploadedAlbums(newAlbumCollection));
+    if (userAlbums.includes(album)) {
+      await deleteAlbum({ albumId: album._id, user: currentUser });
+      const newAlbumCollection = userAlbums.filter(
+        (element) => element._id !== album._id
+      );
+      dispatch(updateUploadedAlbums(newAlbumCollection));
+    } else {
+      console.log('Inside remove shared')
+      console.log(sharedAlbums)
+      await removeSharedAlbum({ albumId: album._id, user: currentUser });
+      const filteredAlbumList = sharedAlbums.filter((albumItem) => {
+        return albumItem._id !== album._id;
+      });
+      dispatch(updateSharedAlbum(filteredAlbumList));
+    }
   }, [album._id, userAlbums, dispatch, currentUser]);
 
   const openAlbum = useCallback(async () => {

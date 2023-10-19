@@ -68,7 +68,7 @@ function Profile(props) {
               cols={2.5}
             >
               {sharedAlbums.map((album) => (
-                <SharedAlbumItem
+                <AlbumItem
                   key={album._id}
                   album={album}
                
