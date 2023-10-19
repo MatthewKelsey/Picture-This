@@ -13,7 +13,12 @@ function SharedAlbumItem({ album }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+
+
   const removeAlbum = async () => {
+
+    
     await removeSharedAlbum({ albumId: album._id, user: user });
     const filteredAlbumList = sharedAlbums.filter((albumItem) => {
       return albumItem._id !== album._id;

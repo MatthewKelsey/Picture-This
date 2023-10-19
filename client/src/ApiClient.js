@@ -1,5 +1,5 @@
-const root = "http://localhost:8080/"
-// const root = "https://picture-server.fly.dev/";
+// const root = "http://localhost:8080/"
+const root = "https://picture-server.fly.dev/";
 
 export const getAllPhotos = async () => {
   try {
