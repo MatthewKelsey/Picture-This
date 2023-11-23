@@ -17,10 +17,6 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../../Store/userSlice";
 
 function Copyright(props) {
-
-  const navigate = useNavigate()
-
- 
   return (
     <Typography
       variant="body2"
@@ -54,8 +50,8 @@ function SignUp() {
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
   // const [exists, setExists] = useState(false);
-  function movePage(){
-    navigate("/login")
+  function movePage() {
+    navigate("/login");
   }
 
   const handleChange = (e) => {
@@ -172,7 +168,6 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-
                 <Link onClick={movePage} variant="body2">
                   Already have an account? Sign in
                 </Link>
