@@ -15,7 +15,14 @@ import { useNavigate } from "react-router-dom";
 import { reg } from "../../ApiClient";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../Store/userSlice";
+
 function Copyright(props) {
+
+  const navigate = useNavigate()
+
+  function movePage(){
+    navigate("/login")
+  }
   return (
     <Typography
       variant="body2"
@@ -164,7 +171,8 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+
+                <Link onClick={movePage} variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

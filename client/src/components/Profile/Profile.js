@@ -2,7 +2,6 @@ import React from "react";
 import NewAlbum from "../NewAlbum/NewAlbum";
 import AlbumItem from ".././AlbumItem/AlbumItem";
 import Invites from "../InviteList/Invites";
-import SharedAlbumItem from "../SharedAlbumItem/SharedAlbumItem";
 import { ImageList } from "@mui/material";
 import "./Profile.css";
 import { useSelector, useDispatch } from "react-redux";
