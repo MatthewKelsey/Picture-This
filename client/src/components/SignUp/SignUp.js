@@ -20,9 +20,7 @@ function Copyright(props) {
 
   const navigate = useNavigate()
 
-  function movePage(){
-    navigate("/login")
-  }
+ 
   return (
     <Typography
       variant="body2"
@@ -56,6 +54,9 @@ function SignUp() {
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
   // const [exists, setExists] = useState(false);
+  function movePage(){
+    navigate("/login")
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
